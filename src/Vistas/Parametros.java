@@ -7,10 +7,6 @@ package Vistas;
 
 import javax.swing.JTextField;
 
-/**
- *
- * @author Mauricio
- */
 public class Parametros extends javax.swing.JFrame {
     
     private int valorDuracion;
