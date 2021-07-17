@@ -3,7 +3,7 @@ package proyecto;
 
 import Vistas.Parametros;
 
-import Componentes.TablaDistribuciones;
+import Componentes.TablaClientes;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,31 +22,29 @@ public class Proyecto {
         Parametros P = new Parametros();
         P.setVisible(true);
      */
-      ArrayList<Integer> t = new ArrayList<Integer>();
+      ArrayList<Integer> tell = new ArrayList<Integer>();
       
-      t.add(1);
-      t.add(2);
+      tell.add(0);
+      tell.add(2);
       
-      ArrayList<Double> p = new ArrayList<Double>();
+      ArrayList<Integer> ts = new ArrayList<Integer>();
       
-      p.add(0.20);
-      p.add(0.80);
+      ts.add(7);
+      ts.add(8);
       
       
-      TablaDistribuciones Dis_TELL=new TablaDistribuciones(t,p);
+      TablaClientes Tabla_Clientes=new TablaClientes(tell,ts);
       
-      Dis_TELL.generarTabla();
+      Tabla_Clientes.generarTabla();
       System.out.println(
-              "Tabla: "+Dis_TELL.getTabla().get(0).gettiempo()+
-              " / "+Dis_TELL.getTabla().get(0).getprobabilidad()+
-              " / "+Dis_TELL.getTabla().get(0).getprobabilidadAcumulada()+
-              " /" +Dis_TELL.getTabla().get(0).getValorMin()+"-"+Dis_TELL.getTabla().get(0).getvalorMax()
+              "Tabla: "+Tabla_Clientes.getTabla().get(0).getNro()+
+              " / "+Tabla_Clientes.getTabla().get(0).getTELL()+
+              " / "+Tabla_Clientes.getTabla().get(0).getTS()
       );
       System.out.println(
-              "Tabla: "+Dis_TELL.getTabla().get(1).gettiempo()+
-              " / "+Dis_TELL.getTabla().get(1).getprobabilidad()+
-              " / "+Dis_TELL.getTabla().get(1).getprobabilidadAcumulada()+
-              " /" +Dis_TELL.getTabla().get(1).getValorMin()+"-"+Dis_TELL.getTabla().get(1).getvalorMax()
+              "Tabla: "+Tabla_Clientes.getTabla().get(1).getNro()+
+              " / "+Tabla_Clientes.getTabla().get(1).getTELL()+
+              " / "+Tabla_Clientes.getTabla().get(1).getTS()
       );
      
       

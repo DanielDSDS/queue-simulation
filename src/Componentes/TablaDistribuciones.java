@@ -48,7 +48,7 @@ public class TablaDistribuciones {
     
     
     public ArrayList<Distribuciones> getTabla(){
-      return tabla;
+      return this.tabla;
     } 
     
 }
