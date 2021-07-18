@@ -40,6 +40,7 @@ public class Distribuciones {
     };
     
     public void setprobablidadAcumulada(double probabilidad){
+      System.out.println(probabilidad);  
       this.probalidadAcumulada=probabilidad;
     };
     
@@ -55,4 +56,10 @@ public class Distribuciones {
     public void setValorMin(double valorMin){
       this.valorMin=valorMin;
     };
+    
+    @Override
+    public String toString() {
+        return "Valor=" + this.tiempo + ", Porcentaje=" + this.probabilidad*100 + ", Porcentaje acumulado=" + this.probalidadAcumulada*100 + ", Intervalo= [" + this.valorMin + "," + this.getvalorMax() + "]";
+    }
+
 }
