@@ -3,6 +3,9 @@ package proyecto;
 
 import Vistas.Parametros;
 
+import Componentes.TablaClientes;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +20,7 @@ public class Proyecto {
         
         Parametros P = new Parametros();
         P.setVisible(true);
+
       /* 
       ArrayList<Integer> tell = new ArrayList<Integer>();
       
@@ -42,8 +46,8 @@ public class Proyecto {
               " / "+Tabla_Clientes.getTabla().get(1).getTELL()+
               " / "+Tabla_Clientes.getTabla().get(1).getTS()
       );
-     */
      
+     */
       
       
     
