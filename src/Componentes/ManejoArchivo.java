@@ -18,8 +18,8 @@ public class ManejoArchivo {
     
     private File archivoEntrada;
     private File archivoSalida;
-    private TablaLlegadas Tl = new TablaLlegadas();
-    private ArrayList<TablaServicio> Ts = new ArrayList();
+    //private TablaLlegadas Tl = new TablaLlegadas();
+    //private ArrayList<TablaServicio> Ts = new ArrayList();
     private String salida;
 
     public ManejoArchivo() {
@@ -77,11 +77,14 @@ public class ManejoArchivo {
                     if(bfRead.equals("Tiempos de Servicio")){
                         op = "Servicio";
                         valorArreglo++;
-                        Ts.add(valorArreglo,new TablaServicio());
-                    }else
+                        //Ts.add(valorArreglo,new TablaServicio());
+                    }
+                    /*
+                    else
                         if(op.equals("Llegadas") && !bfRead.equals(""))
                             Tl.addtiempoEntreLlegadas(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
                                 this.obtenerValor(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
+                    */
                                 
             }         
         }catch(IOException e){
@@ -101,11 +104,15 @@ public class ManejoArchivo {
                     if(bfRead.equals("Tiempos de Servicio")){
                         op = "Servicio";
                         valorArreglo++;
-                        Ts.add(valorArreglo,new TablaServicio());
-                    }else
+                        //Ts.add(valorArreglo,new TablaServicio());
+                    }
+                    
+                    /*
+                    else
                         if(op.equals("Servicio") && !bfRead.equals("") && valor==valorArreglo)
                             Ts.get(valorArreglo).addtiempoDeServicios(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
                                 this.obtenerValor(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
+                    */
             }         
         }catch(IOException e){
         }
@@ -123,6 +130,7 @@ public class ManejoArchivo {
         }
     }
 
+/*
     public TablaLlegadas getTablaLlegadas() {
         return Tl;
     }
@@ -130,5 +138,6 @@ public class ManejoArchivo {
     public TablaServicio getTablaServicio(int i) {
         return Ts.get(i);
     }
+*/
     
 }

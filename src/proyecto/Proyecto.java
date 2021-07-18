@@ -16,7 +16,7 @@ public class Proyecto {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+      public static void main(String[] args) {
         
         Parametros P = new Parametros();
         P.setVisible(true);
@@ -48,10 +48,7 @@ public class Proyecto {
       );
      
      */
-      
-      
-    
-     
+        
     }
     
 }

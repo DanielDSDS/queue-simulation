@@ -1,0 +1,79 @@
+
+ ESTADISTICAS DE LA ETAPA  1:
+   Estabilidad = 4.055555555555555 servidores.
+   Cantidad de Llegadas = 219 llegadas.
+   Llegadas Promedio = 0.5217048098091661 llegadas.
+   Tiempo entre LLegadas Promedio = 1.9194175393057114 MINUTOS.
+   Cantidad de Salidas = 219 salidas.
+   Salidas Promedio = 0.13846705136350207 salidas.
+   Tiempo de Servicio Promedio = 7.222987598583362 MINUTOS.
+
+   Cantidad de veces que un clientes no espero = 69.61666666666666 veces.
+   Cantidad de veces que un cliente se fue = 0.0 veces.
+   Probabilidad de un cliente de esperar = 67.95282722835903%.
+   Cantidad de clientes promedio en cola = 1.8492168478358488 clientes.
+   Cantidad de clientes promedio en el sistema = 5.533752828405482 clientes.
+   Tiempo promedio de un cliente en cola = 3.576192678347073 MINUTOS.
+   Tiempo promedio de un cliente en sistema = 10.799180276930448 MINUTOS.
+   Tiempo adicional que la etapa estuvo abierta = 10.963888888888889 MINUTOS.
+   Porcentaje de utilizacion de los servidores =   Servidor 1: 96.32088451987107 %,  Servidor 2: 94.18687624993068 %,  Servidor 3: 91.3595613258731 %,  Servidor 4: 86.58627596128952 %,
+   Porcentaje de utilizacion del sistema = 92.11339951424104%.
+   Relacion optima entre Costo de Espera del cliente y Costo de nuevo servidor:
+         Recomendable agregar 0.7396867391343394 servidores.
+
+
+ ESTADISTICAS DE LA ETAPA  2:
+   Estabilidad = 7.711111111111111 servidores.
+   Cantidad de Llegadas = 219 llegadas.
+   Llegadas Promedio = 0.5191963214975356 llegadas.
+   Tiempo entre LLegadas Promedio = 1.928058239079602 MINUTOS.
+   Cantidad de Salidas = 219 salidas.
+   Salidas Promedio = 0.07288543875751687 salidas.
+   Tiempo de Servicio Promedio = 13.722157639022516 MINUTOS.
+
+   Cantidad de veces que un clientes no espero = 41.294444444444444 veces.
+   Cantidad de veces que un cliente se fue = 0.0 veces.
+   Probabilidad de un cliente de esperar = 80.9237112507323%.
+   Cantidad de clientes promedio en cola = 3.6313451015788973 clientes.
+   Cantidad de clientes promedio en el sistema = 10.18941571299715 clientes.
+   Tiempo promedio de un cliente en cola = 7.564604567518963 MINUTOS.
+   Tiempo promedio de un cliente en sistema = 21.286762206541475 MINUTOS.
+   Tiempo adicional que la etapa estuvo abierta = 39.958333333333336 MINUTOS.
+   Porcentaje de utilizacion de los servidores =   Servidor 1: 95.9697053399278 %,  Servidor 2: 95.41701207994952 %,  Servidor 3: 94.77274143760879 %,  Servidor 4: 93.9645631902131 %,  Servidor 5: 93.1056450009535 %,  Servidor 6: 92.10862366749582 %,  Servidor 7: 90.46877042567645 %,
+   Porcentaje de utilizacion del sistema = 93.68672302026066%.
+   Relacion optima entre Costo de Espera del cliente y Costo de nuevo servidor:
+         Recomendable agregar 1.452538040631559 servidores.
+
+
+ ESTADISTICAS DE LA ETAPA  3:
+   Estabilidad = 4.997222222222222 servidores.
+   Cantidad de Llegadas = 219 llegadas.
+   Llegadas Promedio = 0.501356527437064 llegadas.
+   Tiempo entre LLegadas Promedio = 1.9955866139122802 MINUTOS.
+   Cantidad de Salidas = 219 salidas.
+   Salidas Promedio = 0.11464881242424381 salidas.
+   Tiempo de Servicio Promedio = 8.72458015209034 MINUTOS.
+
+   Cantidad de veces que un clientes no espero = 147.16944444444445 veces.
+   Cantidad de veces que un cliente se fue = 0.0 veces.
+   Probabilidad de un cliente de esperar = 32.97215035226526%.
+   Cantidad de clientes promedio en cola = 0.33831274009662177 clientes.
+   Cantidad de clientes promedio en el sistema = 4.421244060851967 clientes.
+   Tiempo promedio de un cliente en cola = 0.7209628940870955 MINUTOS.
+   Tiempo promedio de un cliente en sistema = 9.445543046177434 MINUTOS.
+   Tiempo adicional que la etapa estuvo abierta = 49.76111111111111 MINUTOS.
+   Porcentaje de utilizacion de los servidores =   Servidor 1: 88.76886814896534 %,  Servidor 2: 86.17585363657169 %,  Servidor 3: 82.99603707464972 %,  Servidor 4: 78.52855081060814 %,  Servidor 5: 71.82382240473993 %,
+   Porcentaje de utilizacion del sistema = 81.6586264151069%.
+   Relacion optima entre Costo de Espera del cliente y Costo de nuevo servidor:
+         Recomendable agregar 0.13532509603864876 servidores.
+
+ ESTADISTICAS GENERALES:
+   Cantidad de veces que un clientes no espero = 258.0805555555555 veces.
+   Cantidad de veces que un cliente se fue = 0.0 veces.
+   Probabilidad de un cliente de esperar = 60.71833248773889%.
+   Cantidad de clientes promedio en cola = 5.818874689511367 clientes.
+   Cantidad de clientes promedio en el sistema = 20.144412602254597 clientes.
+   Tiempo promedio de un cliente en cola = 11.861760139953132 MINUTOS.
+   Tiempo promedio de un cliente en sistema = 41.53148552964936 MINUTOS.
+   Tiempo adicional que el sistema estuvo abierto = 49.76111111111111 MINUTOS.
+   Porcentaje de utilizacion del sistema = 89.15291631653619%.
