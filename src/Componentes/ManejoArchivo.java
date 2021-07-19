@@ -18,8 +18,8 @@ public class ManejoArchivo {
     
     private File archivoEntrada;
     private File archivoSalida;
-    //private TablaLlegadas Tl = new TablaLlegadas();
-    //private ArrayList<TablaServicio> Ts = new ArrayList();
+    private TablaDistribuciones Tl=new TablaDistribuciones();
+    private TablaDistribuciones Ts=new TablaDistribuciones();
     private String salida;
 
     public ManejoArchivo() {
@@ -64,8 +64,18 @@ public class ManejoArchivo {
         return Integer.parseInt(number);
     }
     
+    public double obtenerValorDouble(String Linea,int pos){
+        String number = Linea.substring(0,pos);
+        double num=Double.parseDouble(number);
+        if(num>0){
+          num=num/100; 
+        }
+        return num;
+    }
+    
     public void leerArchivoLlegadas(){
         String op = "Inicio";
+        
         int valorArreglo=-1;
         try{
             BufferedReader bf = new BufferedReader(new FileReader(this.archivoEntrada));
@@ -77,18 +87,20 @@ public class ManejoArchivo {
                     if(bfRead.equals("Tiempos de Servicio")){
                         op = "Servicio";
                         valorArreglo++;
-                        //Ts.add(valorArreglo,new TablaServicio());
+                        //Ts.add(valorArreglo,new TablaDistribuciones());
                     }
-                    /*
+                    
                     else
                         if(op.equals("Llegadas") && !bfRead.equals(""))
-                            Tl.addtiempoEntreLlegadas(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
-                                this.obtenerValor(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
-                    */
+                            Tl.addTiempo(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
+                                this.obtenerValorDouble(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
+                    
                                 
             }         
         }catch(IOException e){
         }
+    
+      Tl.generarTabla();
     }
     
     public void leerArchivoServicios(int valor){
@@ -107,15 +119,16 @@ public class ManejoArchivo {
                         //Ts.add(valorArreglo,new TablaServicio());
                     }
                     
-                    /*
+                    
                     else
                         if(op.equals("Servicio") && !bfRead.equals("") && valor==valorArreglo)
-                            Ts.get(valorArreglo).addtiempoDeServicios(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
-                                this.obtenerValor(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
-                    */
+                            Ts.addTiempo(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),
+                                this.obtenerValorDouble(this.actualizarLinea(bfRead),this.obtenerPosicion(this.actualizarLinea(bfRead))));
+                    
             }         
         }catch(IOException e){
         }
+      Ts.generarTabla();
     }
     
     public void escribirArchivo(String valor){
@@ -130,14 +143,14 @@ public class ManejoArchivo {
         }
     }
 
-/*
-    public TablaLlegadas getTablaLlegadas() {
+
+    public TablaDistribuciones getTablaLlegadas() {
         return Tl;
     }
 
-    public TablaServicio getTablaServicio(int i) {
-        return Ts.get(i);
+    public TablaDistribuciones getTablaServicio(){
+        return Ts;
     }
-*/
+
     
 }

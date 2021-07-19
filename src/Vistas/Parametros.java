@@ -6,12 +6,17 @@
 package Vistas;
 
 import Componentes.ManejoArchivo;
+import Componentes.TablaDistribuciones;
 import Funciones.Alerta;
 import Funciones.Numerico;
 import javax.swing.JTextField;
 
 public class Parametros extends javax.swing.JFrame {
     
+    
+    private TablaDistribuciones tablaLlegadasM  = new TablaDistribuciones();
+    private TablaDistribuciones tablaLlegadasA  = new TablaDistribuciones();
+    private TablaDistribuciones tablaLlegada = new TablaDistribuciones();
     private int valorDuracion;
     private int valorTiempoSimulacion;
     private int valorNumEtapas;
@@ -282,16 +287,16 @@ public class Parametros extends javax.swing.JFrame {
             Alerta.mensajeError("No se selecciono una opcion para los tiempos entre llegadas");
             return;
         }
-        /*
-        if(manual.isSelected() && !this.tablaLlegadasM.isCompleted()){
+        
+        if(manual.isSelected() && !this.tablaLlegadasM.completo()){
             Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
             return;
         }
-        if(archivo.isSelected() && !this.tablaLlegadasA.isCompleted()){
+        if(archivo.isSelected() && !this.tablaLlegadasA.completo()){
             Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
             return;
         }
-        */
+        
         if(manual.isSelected())
             this.seleccion = 0;
         else
@@ -353,8 +358,8 @@ public class Parametros extends javax.swing.JFrame {
                 return;
             }
         }
-        //this.tablaLlegadasM.addtiempoEntreLlegadas(Integer.parseInt(this.valorLlegada.getText()),Integer.parseInt(this.porcentajeLlegada.getText()));
-        //this.tablaLlegadasManual.setText(this.tablaLlegadasM.toString());
+        this.tablaLlegadasM.addTiempo(Integer.parseInt(this.valorLlegada.getText()),Double.parseDouble(this.porcentajeLlegada.getText())/100);
+        this.tablaLlegadasManual.setText(this.tablaLlegadasM.toString());
     }//GEN-LAST:event_agregarLlegadaActionPerformed
 
     private void unidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadActionPerformed
@@ -369,8 +374,8 @@ public class Parametros extends javax.swing.JFrame {
     private void leerArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
         ManejoArchivo M = new ManejoArchivo();
         M.leerArchivoLlegadas();
-        //this.tablaLlegadasA = M.getTablaLlegadas();
-        //this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
+        this.tablaLlegadasA = M.getTablaLlegadas();
+        this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
     }//GEN-LAST:event_leerArchivoActionPerformed
     
     
