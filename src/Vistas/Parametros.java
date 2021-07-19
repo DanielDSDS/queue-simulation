@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 public class Parametros extends javax.swing.JFrame {
     
     
+    //private TablaDistribuciones tablaServidoresM  = new TablaDistribuciones();
+    //private TablaDistribuciones tablaServidoresA  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegadasM  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegadasA  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegada = new TablaDistribuciones();
@@ -21,6 +23,7 @@ public class Parametros extends javax.swing.JFrame {
     private int valorTiempoSimulacion;
     private int valorNumEtapas;
     private int valorCostoCliente;
+    private int valorCostoServidor;
     private int seleccion;
     /**
      * Creates new form Prueba
@@ -39,6 +42,7 @@ public class Parametros extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -54,30 +58,51 @@ public class Parametros extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel12.setVisible(false);
         jLabel13.setVisible(false);
-        manual = new javax.swing.JRadioButton();
-        archivo = new javax.swing.JRadioButton();
-        siguiente = new javax.swing.JButton();
-        archivo.setSelected(true);
+        jLabel15.setVisible(false);
+        jLabel16.setVisible(false);
+        manualLlegada = new javax.swing.JRadioButton();
+        archivoLlegada = new javax.swing.JRadioButton();
+        manualServicios = new javax.swing.JRadioButton();
+        archivoServicio = new javax.swing.JRadioButton();
+        simular = new javax.swing.JButton();
+        archivoLlegada.setSelected(true);
+        archivoServicio.setSelected(true);
         valorLlegada = new javax.swing.JTextField();
+        valorServidor = new javax.swing.JTextField();
         unidadTiempo = new javax.swing.JComboBox<>();
         tiempoSimulacion = new javax.swing.JTextField();
         porcentajeLlegada = new javax.swing.JTextField();
+        porcentajeServidor = new javax.swing.JTextField();
         agregarLlegada = new javax.swing.JButton();
+        agregarServidor = new javax.swing.JButton();
         agregarLlegada.setVisible(false);
+        agregarServidor.setVisible(false);
         porcentajeLlegada.setVisible(false);
+        porcentajeServidor.setVisible(false);
         valorLlegada.setVisible(false);
+        valorServidor.setVisible(false);
         tablaLlegadasArchivo = new javax.swing.JTextArea();
         tablaLlegadasManual = new javax.swing.JTextArea();
-        leerArchivo = new javax.swing.JButton();
+        tablaServidoresArchivo = new javax.swing.JTextArea();
+        tablaServidoresManual = new javax.swing.JTextArea();
+        leerArchivoServidor = new javax.swing.JButton();
+        leerArchivoLlegada = new javax.swing.JButton();
         costoCliente = new javax.swing.JTextField();
+        costoServidor = new javax.swing.JTextField();
         duracion = new javax.swing.JTextField();
         maxServidores = new javax.swing.JTextField();
         maxClientes = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
         jScrollPane2.setVisible(true);
+        jScrollPane4.setVisible(true);
         unidadLabel = new javax.swing.JLabel();
         unidad = new javax.swing.JComboBox<>();
         unidadLabel2 = new javax.swing.JLabel();
@@ -125,13 +150,13 @@ public class Parametros extends javax.swing.JFrame {
         jLabel8.setText("Tiempos entre llegadas");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, 20));
 
-        manual.setBackground(new java.awt.Color(232, 225, 225));
-        buttonGroup1.add(manual);
-        manual.setText("Manual");
-        jPanel1.add(manual, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
-        manual.addActionListener(new java.awt.event.ActionListener() {
+        manualLlegada.setBackground(new java.awt.Color(232, 225, 225));
+        buttonGroup1.add(manualLlegada);
+        manualLlegada.setText("Manual");
+        jPanel1.add(manualLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
+        manualLlegada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-              leerArchivo.setVisible(false);
+              leerArchivoLlegada.setVisible(false);
               jScrollPane1.setVisible(false);
               jLabel12.setVisible(true);
               jLabel13.setVisible(true);
@@ -142,11 +167,11 @@ public class Parametros extends javax.swing.JFrame {
             }
         });
 
-        archivo.setBackground(new java.awt.Color(232, 225, 225));
-        buttonGroup1.add(archivo);
-        archivo.setText("Archivo");
-        jPanel1.add(archivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
-        archivo.addActionListener(new java.awt.event.ActionListener() {
+        archivoLlegada.setBackground(new java.awt.Color(232, 225, 225));
+        buttonGroup1.add(archivoLlegada);
+        archivoLlegada.setText("Archivo");
+        jPanel1.add(archivoLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
+        archivoLlegada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
               jLabel12.setVisible(false);
               jLabel13.setVisible(false);
@@ -154,21 +179,22 @@ public class Parametros extends javax.swing.JFrame {
               porcentajeLlegada.setVisible(false);
               valorLlegada.setVisible(false);
               agregarLlegada.setVisible(false);
-              leerArchivo.setVisible(true);
+              leerArchivoLlegada.setVisible(true);
               jScrollPane1.setVisible(true);
             }
         });
 
-        leerArchivo.setText("Abrir archivo");
-        leerArchivo.addActionListener(new java.awt.event.ActionListener() {
+        leerArchivoLlegada.setText("Abrir archivo");
+        leerArchivoLlegada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leerArchivoActionPerformed(evt);
+                leerArchivoLlegadaActionPerformed(evt);
             }
         });
-        jPanel1.add(leerArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, 20));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 570, 90));
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 570, 90));
+        jPanel1.add(leerArchivoLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, 20));
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 570, 120));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 570, 120));
 
         jLabel12.setText("Valor:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
@@ -185,28 +211,98 @@ public class Parametros extends javax.swing.JFrame {
                 agregarLlegadaActionPerformed(evt);
             }
         });
-      
-        siguiente.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        siguiente.setText("Simular");
-        siguiente.addActionListener(new java.awt.event.ActionListener() {
+
+        //Tiempo de servicios
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setText("Tiempos de Servicios");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, -1, 20));
+
+        manualServicios.setBackground(new java.awt.Color(232, 225, 225));
+        buttonGroup2.add(manualServicios);
+        manualServicios.setText("Manual");
+        jPanel1.add(manualServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 580, -1, -1));
+        manualServicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                siguienteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(siguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 525, 120, 30));
-        siguiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                siguienteActionPerformed(evt);
+              leerArchivoServidor.setVisible(false);
+              jScrollPane3.setVisible(false);
+              jLabel15.setVisible(true);
+              jLabel16.setVisible(true);
+              agregarServidor.setVisible(true);
+              porcentajeServidor.setVisible(true);
+              valorServidor.setVisible(true);
+              jScrollPane4.setVisible(true);
             }
         });
 
-        tablaLlegadasArchivo.setColumns(20);
+        archivoServicio.setBackground(new java.awt.Color(232, 225, 225));
+        buttonGroup2.add(archivoServicio);
+        archivoServicio.setText("Archivo");
+        jPanel1.add(archivoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, -1, -1));
+        archivoServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+              jLabel15.setVisible(false);
+              jLabel16.setVisible(false);
+              jScrollPane4.setVisible(false);
+              porcentajeServidor.setVisible(false);
+              valorServidor.setVisible(false);
+              agregarServidor.setVisible(false);
+              leerArchivoServidor.setVisible(true);
+              jScrollPane3.setVisible(true);
+            }
+        });
+
+        leerArchivoServidor.setText("Abrir archivo");
+        leerArchivoServidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leerArchivoServicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(leerArchivoServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, 20));
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 570, 120));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 570, 120));
+
+        jLabel15.setText("Valor:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 610, -1, -1));
+        jPanel1.add(valorServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 610, 38, -1));
+
+        jLabel16.setText("Porcentaje:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 610, -1, -1));
+        jPanel1.add(porcentajeServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 42, -1));
+
+        agregarServidor.setText("Agregar");
+        jPanel1.add(agregarServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 610, 90, 20));
+        agregarServidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarServidorActionPerformed(evt);
+            }
+        });
+      
+        simular.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        simular.setText("Simular");
+        jPanel1.add(simular, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 790, 120, 30));
+        simular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simularActionPerformed(evt);
+            }
+        });
+
+        tablaLlegadasArchivo.setColumns(40);
         tablaLlegadasArchivo.setRows(5);
         jScrollPane1.setViewportView(tablaLlegadasArchivo);
 
-        tablaLlegadasManual.setColumns(20);
+        tablaLlegadasManual.setColumns(40);
         tablaLlegadasManual.setRows(5);
         jScrollPane2.setViewportView(tablaLlegadasManual);
+
+        tablaServidoresArchivo.setColumns(40);
+        tablaServidoresArchivo.setRows(5);
+        jScrollPane3.setViewportView(tablaServidoresArchivo);
+
+        tablaServidoresManual.setColumns(40);
+        tablaServidoresManual.setRows(5);
+        jScrollPane4.setViewportView(tablaServidoresManual);
 
         unidadTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minutos", "Horas", "Dias", "Semanas", "Meses", "Años" }));
         jPanel1.add(unidadTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
@@ -214,6 +310,7 @@ public class Parametros extends javax.swing.JFrame {
         jPanel1.add(maxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 42, -1));
         jPanel1.add(maxServidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 42, -1));
         jPanel1.add(costoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 42, -1));
+        jPanel1.add(costoServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 42, -1));
         jPanel1.add(duracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 42, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -242,13 +339,13 @@ public class Parametros extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+    private void simularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         // TODO add your handling code here:
         if(!Numerico.isNumeric(this.duracion.getText())){
             Alerta.mensajeError("La duración de simulación debe ser un valor numerico");
@@ -283,27 +380,39 @@ public class Parametros extends javax.swing.JFrame {
                 return;
             }
         }
-        if(!archivo.isSelected() && !manual.isSelected()){
+        if(!Numerico.isNumeric(this.costoServidor.getText())){
+            Alerta.mensajeError("El costo por servidor debe ser númerico");
+            this.costoServidor.setText("");
+            return;
+        }else{
+            if(Integer.parseInt(this.costoServidor.getText())<0){
+                Alerta.mensajeError("El costo por servidor no es valido");
+                this.costoServidor.setText("");
+                return;
+            }
+        }
+        if(!archivoLlegada.isSelected() && !manualLlegada.isSelected()){
             Alerta.mensajeError("No se selecciono una opcion para los tiempos entre llegadas");
             return;
         }
         
-        if(manual.isSelected() && !this.tablaLlegadasM.completo()){
+        if(manualLlegada.isSelected() && !this.tablaLlegadasM.completo()){
             Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
             return;
         }
-        if(archivo.isSelected() && !this.tablaLlegadasA.completo()){
+        if(archivoLlegada.isSelected() && !this.tablaLlegadasA.completo()){
             Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
             return;
         }
         
-        if(manual.isSelected())
+        if(manualLlegada.isSelected())
             this.seleccion = 0;
         else
             this.seleccion = 1;
         this.valorDuracion = Integer.parseInt(this.duracion.getText());
         this.valorTiempoSimulacion = Integer.parseInt(this.tiempoSimulacion.getText());
         this.valorCostoCliente = Integer.parseInt(this.costoCliente.getText());
+        this.valorCostoServidor = Integer.parseInt(this.costoServidor.getText());
         
         //this.setVisible(false);
         //ParametrosEtapas P = new ParametrosEtapas(this.valorNumEtapas,this);
@@ -324,6 +433,10 @@ public class Parametros extends javax.swing.JFrame {
 
     public int getValorCostoCliente() {
         return valorCostoCliente;
+    }
+
+    public int getValorCostoServidor() {
+        return valorCostoServidor;
     }
 
     public String getUnidad() {
@@ -362,6 +475,34 @@ public class Parametros extends javax.swing.JFrame {
         this.tablaLlegadasManual.setText(this.tablaLlegadasM.toString());
     }//GEN-LAST:event_agregarLlegadaActionPerformed
 
+    private void agregarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLlegadaActionPerformed
+        // TODO add your handling code here:
+        if(!Numerico.isNumeric(this.valorServidor.getText())){
+            Alerta.mensajeError("El parametro: VALOR LLEGADA, no es numerico");
+            this.valorLlegada.setText("");
+            return;
+        }else{
+            if(Integer.parseInt(this.valorServidor.getText())<=0){
+                Alerta.mensajeError("El parametro: VALOR LLEGADA, no es valido");
+                this.valorLlegada.setText("");
+                return;
+            }
+        }
+        if(!Numerico.isNumeric(this.porcentajeServidor.getText())){
+            Alerta.mensajeError("El parametro: PORCENTAJE LLEGADA, no es numerico");
+            this.valorLlegada.setText("");
+            return;
+        }else{
+            if(Integer.parseInt(this.porcentajeServidor.getText())<=0){
+                Alerta.mensajeError("El parametro: PORCENTAJE LLEGADA, no es valido");
+                this.valorLlegada.setText("");
+                return;
+            }
+        }
+        //this.tablaServidoresM.addTiempo(Integer.parseInt(this.valorServidor.getText()),Double.parseDouble(this.porcentajeServidor.getText())/100);
+        //this.tablaServidoresManual.setText(this.tablaServidoresM.toString());
+    }//GEN-LAST:event_agregarLlegadaActionPerformed
+
     private void unidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadActionPerformed
         // TODO add your handling code here:
         this.unidadLabel.setText((String) this.unidad.getSelectedItem());
@@ -371,24 +512,36 @@ public class Parametros extends javax.swing.JFrame {
                 this.unidadTiempo.addItem(this.unidad.getItemAt(i));
     }//GEN-LAST:event_unidadActionPerformed
 
-    private void leerArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
+    private void leerArchivoLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
         ManejoArchivo M = new ManejoArchivo();
         M.leerArchivoLlegadas();
         this.tablaLlegadasA = M.getTablaLlegadas();
         this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
+    }//GEN-LAST:event_leerArchivoActionPerformed
+
+    private void leerArchivoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
+        //ManejoArchivo M = new ManejoArchivo();
+        //M.leerArchivoLlegadas();
+        //this.tablaLlegadasA = M.getTablaLlegadas();
+        //this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
     }//GEN-LAST:event_leerArchivoActionPerformed
     
     
       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton agregarLlegada;
-    private javax.swing.JRadioButton archivo;
+    private javax.swing.JButton agregarServidor;
+    private javax.swing.JRadioButton archivoLlegada;
+    private javax.swing.JRadioButton archivoServicio;
     private javax.swing.JTextField costoCliente;
+    private javax.swing.JTextField costoServidor;
     private javax.swing.JTextField duracion;
     private javax.swing.JTextField maxServidores;
     private javax.swing.JTextField maxClientes;
-    private javax.swing.JButton leerArchivo; 
+    private javax.swing.JButton leerArchivoLlegada; 
+    private javax.swing.JButton leerArchivoServidor; 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -402,16 +555,26 @@ public class Parametros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton manual;
+    private javax.swing.JRadioButton manualLlegada;
+    private javax.swing.JRadioButton manualServicios;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField tiempoSimulacion;
     private javax.swing.JTextField porcentajeLlegada;
+    private javax.swing.JTextField porcentajeServidor;
     private javax.swing.JTextArea tablaLlegadasArchivo;
     private javax.swing.JTextArea tablaLlegadasManual;
+    private javax.swing.JTextArea tablaServidoresArchivo;
+    private javax.swing.JTextArea tablaServidoresManual;
     private javax.swing.JTextField valorLlegada;
-    private javax.swing.JButton siguiente;
+    private javax.swing.JTextField valorServidor;
+    private javax.swing.JButton simular;
     private javax.swing.JLabel titulo;
     private javax.swing.JComboBox<String> unidad;
     private javax.swing.JLabel unidadLabel;
