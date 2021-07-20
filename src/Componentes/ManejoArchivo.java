@@ -118,8 +118,6 @@ public class ManejoArchivo {
                         valorArreglo++;
                         //Ts.add(valorArreglo,new TablaServicio());
                     }
-                    
-                    
                     else
                         if(op.equals("Servicio") && !bfRead.equals("") && valor==valorArreglo)
                             Ts.addTiempo(this.obtenerValor(bfRead,this.obtenerPosicion(bfRead)),

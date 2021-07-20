@@ -14,10 +14,10 @@ import javax.swing.JTextField;
 public class Parametros extends javax.swing.JFrame {
     
     
-    //private TablaDistribuciones tablaServidoresM  = new TablaDistribuciones();
-    //private TablaDistribuciones tablaServidoresA  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegadasM  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegadasA  = new TablaDistribuciones();
+    private TablaDistribuciones tablaServidoresA  = new TablaDistribuciones();
+    private TablaDistribuciones tablaServidoresM  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegada = new TablaDistribuciones();
     private int valorDuracion;
     private int valorTiempoSimulacion;
@@ -499,8 +499,8 @@ public class Parametros extends javax.swing.JFrame {
                 return;
             }
         }
-        //this.tablaServidoresM.addTiempo(Integer.parseInt(this.valorServidor.getText()),Double.parseDouble(this.porcentajeServidor.getText())/100);
-        //this.tablaServidoresManual.setText(this.tablaServidoresM.toString());
+        this.tablaServidoresM.addTiempo(Integer.parseInt(this.valorServidor.getText()),Double.parseDouble(this.porcentajeServidor.getText())/100);
+        this.tablaServidoresManual.setText(this.tablaServidoresM.toString());
     }//GEN-LAST:event_agregarLlegadaActionPerformed
 
     private void unidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadActionPerformed
@@ -520,10 +520,10 @@ public class Parametros extends javax.swing.JFrame {
     }//GEN-LAST:event_leerArchivoActionPerformed
 
     private void leerArchivoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
-        //ManejoArchivo M = new ManejoArchivo();
-        //M.leerArchivoLlegadas();
-        //this.tablaLlegadasA = M.getTablaLlegadas();
-        //this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
+        ManejoArchivo M = new ManejoArchivo();
+        M.leerArchivoServicios(0);
+        this.tablaServidoresA = M.getTablaServicio();
+        this.tablaServidoresArchivo.setText(tablaServidoresA.toString());
     }//GEN-LAST:event_leerArchivoActionPerformed
     
     

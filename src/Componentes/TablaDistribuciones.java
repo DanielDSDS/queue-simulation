@@ -92,7 +92,7 @@ public class TablaDistribuciones {
     }
     
     @Override
-    public String toString (){
+    public String toString(){
         String timeEntries = " Lista tiempo Llegadas: ";
         for (Distribuciones tiempo : this.tabla) {
             timeEntries = timeEntries+ "\n  " + tiempo.toString();
