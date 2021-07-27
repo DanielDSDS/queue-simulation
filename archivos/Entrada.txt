@@ -10,15 +10,3 @@ Tiempos de Servicio
 7 30
 8 35
 9 15
-
-Tiempos de Servicio
-10 15
-12 20
-14 45
-18 20
-
-Tiempos de Servicio
-4 10
-7 20
-9 35
-11 35

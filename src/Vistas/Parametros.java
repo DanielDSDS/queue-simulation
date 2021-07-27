@@ -7,20 +7,25 @@ package Vistas;
 
 import Componentes.ManejoArchivo;
 import Componentes.TablaDistribuciones;
+import Componentes.Sistema;
+import Componentes.TablaArrivals;
 import Funciones.Alerta;
 import Funciones.Numerico;
 import javax.swing.JTextField;
 
 public class Parametros extends javax.swing.JFrame {
     
-    
+    private Salida salida; 
     private TablaDistribuciones tablaLlegadasM  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegadasA  = new TablaDistribuciones();
     private TablaDistribuciones tablaServidoresA  = new TablaDistribuciones();
     private TablaDistribuciones tablaServidoresM  = new TablaDistribuciones();
     private TablaDistribuciones tablaLlegada = new TablaDistribuciones();
+    public static final int DIA = 1;
+    public static final int MES = 30;
+    public static final int SEMANA = 7;
+    public static final int YEAR = 360;
     private int valorDuracion;
-    private int valorTiempoSimulacion;
     private int valorNumEtapas;
     private int valorCostoCliente;
     private int valorCostoServidor;
@@ -40,7 +45,7 @@ public class Parametros extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        this.salida = new Salida();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
@@ -49,7 +54,6 @@ public class Parametros extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -128,15 +132,11 @@ public class Parametros extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Unidad de tiempo a utilizar");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Duración de la simulación");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Tiempo de la simulación");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Costo de espera del cliente por unidad de tiempo ($)");
@@ -305,9 +305,6 @@ public class Parametros extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tablaServidoresManual);
 
         unidadTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minutos", "Horas", "Dias", "Semanas", "Meses", "Años" }));
-        jPanel1.add(unidadTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
-        jPanel1.add(tiempoSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 42, -1));
-        jPanel1.add(maxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 42, -1));
         jPanel1.add(maxServidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 42, -1));
         jPanel1.add(costoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 42, -1));
         jPanel1.add(costoServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 42, -1));
@@ -319,7 +316,7 @@ public class Parametros extends javax.swing.JFrame {
         jPanel1.add(maxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 42, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setText("Cantidad maxima de servidores");
+        jLabel11.setText("Cantidad de servidores");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
         jPanel1.add(maxServidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 42, -1));
 
@@ -329,7 +326,7 @@ public class Parametros extends javax.swing.JFrame {
                 unidadActionPerformed(evt);
             }
         });
-        jPanel1.add(unidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        jPanel1.add(unidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -355,17 +352,6 @@ public class Parametros extends javax.swing.JFrame {
             if(Integer.parseInt(this.duracion.getText())<=0){
                 Alerta.mensajeError("La duración de la simulación no es valida");
                 this.duracion.setText("");
-                return;
-            }
-        }
-        if(!Numerico.isNumeric(this.tiempoSimulacion.getText())){
-            Alerta.mensajeError("El tiempo de simulación debe ser un valor númerico");
-            this.tiempoSimulacion.setText("");
-            return;
-        }else{
-            if(Integer.parseInt(this.tiempoSimulacion.getText())<=0){
-                Alerta.mensajeError("El tiempo a simular no es valido");
-                this.tiempoSimulacion.setText("");
                 return;
             }
         }
@@ -397,11 +383,11 @@ public class Parametros extends javax.swing.JFrame {
         }
         
         if(manualLlegada.isSelected() && !this.tablaLlegadasM.completo()){
-            Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
+            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
             return;
         }
         if(archivoLlegada.isSelected() && !this.tablaLlegadasA.completo()){
-            Alerta.mensajeError("El parametro: TIEMPOS ENTRE LLEGADAS, no esta completo");
+            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
             return;
         }
         
@@ -409,26 +395,79 @@ public class Parametros extends javax.swing.JFrame {
             this.seleccion = 0;
         else
             this.seleccion = 1;
+
         this.valorDuracion = Integer.parseInt(this.duracion.getText());
-        this.valorTiempoSimulacion = Integer.parseInt(this.tiempoSimulacion.getText());
         this.valorCostoCliente = Integer.parseInt(this.costoCliente.getText());
         this.valorCostoServidor = Integer.parseInt(this.costoServidor.getText());
-        
-        //this.setVisible(false);
-        //ParametrosEtapas P = new ParametrosEtapas(this.valorNumEtapas,this);
-        //P.setVisible(true);
+
+        Sistema Simulacion;
+        TablaArrivals tabla = new TablaArrivals();        
+
+        if(this.seleccion==0)
+                if(manualServicios.isSelected())
+                    Simulacion = new Sistema(tabla,
+                                        1,
+                                        Integer.parseInt(this.maxServidores.getText()),
+                                        Integer.parseInt(this.duracion.getText()), 
+                                        Integer.parseInt(this.maxClientes.getText()),
+                                        this.getValorCostoCliente(),
+                                        this.getValorCostoServidor(),
+                                        this.tablaLlegadasM,
+                                        this.tablaServidoresM,
+                                        this.salida);
+                else
+                    Simulacion = new Sistema(tabla,
+                                        1,
+                                        Integer.parseInt(this.maxServidores.getText()),
+                                        Integer.parseInt(this.duracion.getText()), 
+                                        Integer.parseInt(this.maxClientes.getText()),
+                                        this.getValorCostoCliente(),
+                                        this.getValorCostoServidor(),
+                                        this.tablaLlegadasM,
+                                        this.tablaServidoresA,
+                                        this.salida);
+            else
+                if(manualServicios.isSelected())
+                    Simulacion = new Sistema(tabla,
+                                        1,
+                                        Integer.parseInt(this.maxServidores.getText()),
+                                        Integer.parseInt(this.duracion.getText()), 
+                                        Integer.parseInt(this.maxClientes.getText()),
+                                        this.getValorCostoCliente(),
+                                        this.getValorCostoServidor(),
+                                        this.tablaLlegadasA,
+                                        this.tablaServidoresM,
+                                        this.salida);
+                else
+                    Simulacion = new Sistema(tabla,
+                                        1,
+                                        Integer.parseInt(this.maxServidores.getText()),
+                                        Integer.parseInt(this.duracion.getText()), 
+                                        Integer.parseInt(this.maxClientes.getText()),
+                                        this.getValorCostoCliente(),
+                                        this.getValorCostoServidor(),
+                                        this.tablaLlegadasA,
+                                        this.tablaServidoresA,
+                                        this.salida);
+            Simulacion.iniciarSimulacion();
+            this.setVisible(false);
+            salida.setVisible(true);
     }//GEN-LAST:event_siguienteActionPerformed
+
+    public int determinarNumeroCiclos(){
+        if(this.getUnidadTiempo().equals("DIAS"))
+            return this.DIA*this.getValorDuracion();
+        if(this.getUnidadTiempo().equals("SEMANAS"))
+            return this.SEMANA*this.getValorDuracion();
+        if(this.getUnidadTiempo().equals("MESES"))
+            return this.MES*this.getValorDuracion();
+        if(this.getUnidadTiempo().equals("AÑOS"))
+            return this.YEAR*this.getValorDuracion();
+        return 1;  
+    }
 
     public int getValorDuracion() {
         return valorDuracion;
-    }
-
-    public int getValorTiempoSimulacion() {
-        return valorTiempoSimulacion;
-    }
-
-    public int getValorNumEtapas() {
-        return valorNumEtapas;
     }
 
     public int getValorCostoCliente() {
@@ -546,7 +585,6 @@ public class Parametros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
