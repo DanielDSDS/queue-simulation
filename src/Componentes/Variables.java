@@ -76,9 +76,12 @@ public class Variables {
     
     public int getAvaibleServer(){
       for(int i=0;i<this.l_SS.size();i++){
-        if(this.l_SS.get(i))
+        if(this.l_SS.get(i)){
+            System.out.println("Servidor habilitado: "+i);
             return i;
+        }    
       };
+      
       return -1;//Ningun servidor esta disponible
     }
    

@@ -39,4 +39,9 @@ public class Clientes {
        return this.NroS;
     }
     
+    @Override
+    public String toString(){
+        return "Cliente Nro: "+this.Nro+" /TS:  "+this.ts+" /TLL:"+this.tell;
+    }
+    
 }

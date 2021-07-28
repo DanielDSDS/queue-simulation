@@ -445,7 +445,7 @@ public class Parametros extends javax.swing.JFrame {
                                         this.tablaLlegadasA,
                                         this.tablaServidoresA,
                                         this.salida);
-            Simulacion.iniciarSimulacion();
+            Simulacion.comenzarSimulacion();
             this.setVisible(false);
             salida.setVisible(true);
     }//GEN-LAST:event_siguienteActionPerformed
@@ -482,7 +482,7 @@ public class Parametros extends javax.swing.JFrame {
         return (String)unidadTiempo.getSelectedItem();
     }
 
-    private void agregarLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLlegadaActionPerformed
+    private void agregarLlegadaActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
         if(!Numerico.isNumeric(this.valorLlegada.getText())){
             Alerta.mensajeError("El parametro: VALOR LLEGADA, no es numerico");
@@ -508,7 +508,7 @@ public class Parametros extends javax.swing.JFrame {
         }
         this.tablaLlegadasM.addTiempo(Integer.parseInt(this.valorLlegada.getText()),Double.parseDouble(this.porcentajeLlegada.getText())/100);
         this.tablaLlegadasManual.setText(this.tablaLlegadasM.toString());
-    }//GEN-LAST:event_agregarLlegadaActionPerformed
+    }                                              
 
     private void agregarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLlegadaActionPerformed
         // TODO add your handling code here:
@@ -547,12 +547,12 @@ public class Parametros extends javax.swing.JFrame {
                 this.unidadTiempo.addItem(this.unidad.getItemAt(i));
     }//GEN-LAST:event_unidadActionPerformed
 
-    private void leerArchivoLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
+    private void leerArchivoLlegadaActionPerformed(java.awt.event.ActionEvent evt) {                                            
         ManejoArchivo M = new ManejoArchivo();
         M.leerArchivoLlegadas();
         this.tablaLlegadasA = M.getTablaLlegadas();
         this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
-    }//GEN-LAST:event_leerArchivoActionPerformed
+    }                                           
 
     private void leerArchivoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
         ManejoArchivo M = new ManejoArchivo();

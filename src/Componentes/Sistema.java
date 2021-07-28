@@ -65,13 +65,13 @@ public class Sistema {
      */
       
      public Sistema(TablaArrivals tablaArrival, int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
-       this.timeModeling=tablaArrival.nextArrival();
+       this.timeModeling=0;
        this.prevTimeModeling=0;
        this.variables=new TablaVariables();
        this.eventos=new TablaEventos();
-       for(int i=0;i<=numServers;i++){
+       this.eventos.getEvento().setAT(0);
+       for(int i=0;i<=numServers-1;i++){
         this.variables.getVariables().addServidor(true);
-        this.eventos.getEvento().setAT(0);
         this.eventos.getEvento().setDT(999);
        }
        this.Lista_espera=new ArrayList<Integer>();
@@ -147,19 +147,23 @@ public class Sistema {
      */
     
     public void generarTablaCliente(){
-       Aleatorio A=new Aleatorio();
        ArrayList<Integer> Lista_TELL=new ArrayList<Integer>();
        ArrayList<Integer> Lista_TS=new ArrayList<Integer>();
-       for(int i=0;i<=this.numClientMax;i++){
+       for(int i=0;i<=this.numClientMax-1;i++){
+          Aleatorio A=new Aleatorio(); 
           int num=A.generarNumero();
           int tiempoLLegada=this.tablaLLegadas.getTiempo(num);
-          int tiempoServicio=this.tablaServicio.getTiempo(num);
+          Aleatorio B=new Aleatorio(); 
+          int numB=B.generarNumero();
+          int tiempoServicio=this.tablaServicio.getTiempo(numB);
           Lista_TELL.add(tiempoLLegada);
           Lista_TS.add(tiempoServicio);
        }
        this.clientes.setTS(Lista_TS);
        this.clientes.setTELL(Lista_TELL);
        this.clientes.generarTablaClientes();
+       System.out.println( this.clientes.toString());
+      
     };  
       
       
@@ -168,33 +172,37 @@ public class Sistema {
       int indexCliente=0;
       Clientes actualCliente,nextCliente;
       int indexCola=0;
+      boolean despachadoTodos=false;
       this.simulacion.Add(0,"Cond.Inicial",-1);
       do{
+      
         this.numEvent=this.numEvent+1;
         if((this.eventos.getEvento().getAT()<this.eventos.getEvento().nextDeparture() 
            && this.timeModeling<this.finishTime
+           && this.variables.getVariables().getCantClientes()<this.numClientMax
+           && this.clientes.allIngresados()==false
            )
            ||
            (this.eventos.getEvento().getAT()<this.eventos.getEvento().nextDeparture() 
            && indexCliente<this.clientes.getTabla().size()
+           && this.variables.getVariables().getCantClientes()<this.numClientMax     
+           && this.clientes.allIngresados()==false     
            )){
-          System.out.println("condicion 1");
+          System.out.println("Condicion de llegada");
           //equivalente a numClienteEntrada?
-          int nextArrival = this.eventos.getEvento().getAT();
-          System.out.println("indice llegada " + nextArrival);
           System.out.println("indice cliente " + indexCliente);
-          indexCliente = this.clientes.searchClientInServer(nextArrival);
           actualCliente = this.clientes.getFromList(indexCliente);
           this.simulacion.Add(this.numEvent,"LLegada",indexCliente);
           this.setTipoEvent("Llegada");
           this.prevTimeModeling=this.timeModeling;
-          this.setTimeModeling(actualCliente.getTELL());
+       
           this.variables.getVariables().setTM(this.timeModeling);
           this.F.actualizarCantidadClientesEnSistema(this.prevTimeModeling,this.timeModeling,this.numClientSistem);
           this.F.actualizarCantidadClientesEnCola(this.prevTimeModeling, this.timeModeling, this.Lista_espera.size());
           this.F.actualizarPorcentajes(this.prevTimeModeling, this.timeModeling,this.variables.getVariables().getListaSS()); 
           int indexServer=this.variables.getVariables().getAvaibleServer();
           if(indexServer==-1){
+            System.out.println("Cliente Nro "+actualCliente.getNro()+" Entro en espera");
             this.Lista_espera.add(actualCliente.getNro());
             this.addClientSistem();
             this.variables.getVariables().upCantClientes();
@@ -204,38 +212,56 @@ public class Sistema {
             this.addClientSistem();
             this.variables.getVariables().upCantClientes();
             this.variables.getVariables().setStatusServidor(indexServer,false);
-            this.eventos.getEvento().updateDT(indexServer,actualCliente.getTS());
-            this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
+            this.eventos.getEvento().updateDT(indexServer,actualCliente.getTS()+this.timeModeling);
+            if(this.numEvent==0)
+             this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
+            else
+             this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
             actualCliente.setNroS(indexServer);
+            indexCliente=indexCliente+1;
           }
-          
+          this.setTimeModeling(this.eventos.getEvento().getAT());
+          System.out.println("TM :"+this.timeModeling);
         }
         else{
-          System.out.println("condicion 2 " );
+          System.out.println("Condicion de salida");
           int indexS=this.eventos.getEvento().nextExit();
+          System.out.println("La siguiente salida viende del servidor: "+indexS);
           indexCliente=this.clientes.searchClientInServer(indexS);
           actualCliente=this.clientes.getFromList(indexCliente);
+          actualCliente.setNroS(-2);
           this.simulacion.Add(this.numEvent,"Salida",indexCliente);
           this.prevTimeModeling=this.timeModeling;
           this.setTimeModeling(this.eventos.getEvento().nextDeparture());
+          System.out.println("TM :"+this.timeModeling);
           this.variables.getVariables().setTM(this.timeModeling);
           this.F.actualizarCantidadClientesEnSistema(this.prevTimeModeling,this.timeModeling,this.numClientSistem);
           this.F.actualizarCantidadClientesEnCola(this.prevTimeModeling, this.timeModeling, this.Lista_espera.size());
           this.subClientSistem();
+          
           this.variables.getVariables().susCantClientes();
           this.F.actualizarTiempoClienteEnSistema(actualCliente.getTELL(),this.eventos.getEvento().nextDeparture(),indexCliente);
           this.F.actualizarTiempoClienteEnCola(actualCliente.getTELL(),this.eventos.getEvento().nextDeparture(),actualCliente.getTS(),indexCliente);
           this.F.actualizarPorcentajes(this.prevTimeModeling, this.timeModeling, this.variables.getVariables().getListaSS());
-          int clienteCola=this.Lista_espera.get(indexCola);
-          this.clientes.getTabla().get(clienteCola).setNroS(indexS);
-          this.F.tiempoDeServicio(this.clientes.generarTabla().get(clienteCola).getTS());
-          this.eventos.getEvento().updateDT(indexS,this.clientes.generarTabla().get(clienteCola).getTS()+this.timeModeling);
-          this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
-          indexCola=indexCola+1;
+    
+          if(!this.Lista_espera.isEmpty()){
+           int clienteCola=this.Lista_espera.get(indexCola);
+           this.Lista_espera.remove(indexCola);
+       
+            this.clientes.getTabla().get(clienteCola).setNroS(indexS);
+            this.F.tiempoDeServicio(this.clientes.generarTabla().get(clienteCola).getTS());
+            this.eventos.getEvento().updateDT(indexS,this.clientes.generarTabla().get(clienteCola).getTS()+this.timeModeling);
+            indexCola=indexCola+1;
+            indexCliente=indexCliente+1;  
+          }
+          else{
+            this.eventos.getEvento().updateDT(indexS,999);
+          }
+      
         }
         this.eventos.updateRegistro();
         this.variables.updateRegistro();
-     }while(this.timeModeling<this.finishTime || this.numClientEntrada!=0 || !this.tablaArrival.isEmpty());
+     }while((this.timeModeling<this.finishTime || this.variables.getVariables().getCantClientes()!=0|| !this.Lista_espera.isEmpty()) && !this.clientes.allDespachados());
      this.F.CalcularPromedios(this.timeModeling);
      this.F.calcularTiempoAdicional(timeModeling, finishTime);
      this.F.relacionOptima(costoEsperaClient, costoDeServidor);

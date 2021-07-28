@@ -68,5 +68,30 @@ public class TablaClientes {
       System.out.println("index " + index);
       return this.clientes.get(index);
     }
+   
+    public boolean allDespachados(){
+      for(int i=0;i<this.clientes.size();i++){
+         if(this.clientes.get(i).getNroS()!=-2)
+              return false;
+      }
+      return true;
+    }
     
+    public boolean allIngresados(){
+       for(int i=0;i<this.clientes.size();i++){
+          if(this.clientes.get(i).getNroS()==-1)
+              return false;
+       }
+       return true;
+    };
+    
+    @Override
+    public String toString(){
+        String clienteEntries = " Lista de clientes: ";
+        for (Clientes cliente : this.clientes) {
+            clienteEntries = clienteEntries+ "\n  " + cliente.toString();
+        }
+
+        return clienteEntries;
+    }
 }
