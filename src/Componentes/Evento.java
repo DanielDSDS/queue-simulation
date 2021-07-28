@@ -36,10 +36,30 @@ public class Evento {
       this.Lista_DT.add(dt);
     }
     
+    public int nextDeparture(){
+       int nextD=999;
+       for(int i=0;i<=this.Lista_DT.size();i++){
+           if(this.Lista_DT.get(i)<nextD)
+              nextD=this.Lista_DT.get(i);
+       }
+       return nextD;
+    }
+    
+    public int nextExit(){
+       int nextD=999;
+       int indexS=0;
+       for(int i=0;i<=this.Lista_DT.size();i++){
+           if(this.Lista_DT.get(i)<nextD){
+              nextD=this.Lista_DT.get(i);
+              indexS=i;
+           }   
+       }
+       return indexS;
+    }
+    
     public int getDT(int i){
        return this.Lista_DT.get(i);
     }
-    
     public void updateDT(int i,int dt){
       this.Lista_DT.set(i, dt);
     }

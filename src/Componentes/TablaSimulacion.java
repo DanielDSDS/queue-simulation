@@ -28,5 +28,9 @@ public class TablaSimulacion {
       return this.Lista_Simulacion;
     }
     
+    public int getNroEventoActual(){
+        return this.Lista_Simulacion.get(this.Lista_Simulacion.size()).getNro_Evento();
+    }
+    
     
 }

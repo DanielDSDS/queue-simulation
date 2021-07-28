@@ -13,6 +13,7 @@ public class Clientes {
     private int Nro; //Nro del cliente
     private int tell; //Tiempo entre llegadas
     private int ts; //Tiempo de servicio
+    private int NroS=-1;//Servidor en el que esta el cliente(-1) representa que no esta asignado a ningun servidor
     
     Clientes(int nro,int tell,int ts){
       this.Nro=nro;
@@ -31,6 +32,11 @@ public class Clientes {
     public int getTS(){
       return this.ts;
     }
-    
+    public void setNroS(int NroS){
+        this.NroS=NroS;
+    }
+    public int getNroS(){
+       return this.NroS;
+    }
     
 }
