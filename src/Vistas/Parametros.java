@@ -383,11 +383,11 @@ public class Parametros extends javax.swing.JFrame {
         }
         
         if(manualLlegada.isSelected() && !this.tablaLlegadasM.completo()){
-            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
+            Alerta.mensajeError("El tiempo entre llegadas no tiene el % introducido completo");
             return;
         }
         if(archivoLlegada.isSelected() && !this.tablaLlegadasA.completo()){
-            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
+            Alerta.mensajeError("El tiempo entre llegadas no tiene el % introducido completo");
             return;
         }
         
@@ -406,7 +406,6 @@ public class Parametros extends javax.swing.JFrame {
         if(this.seleccion==0)
                 if(manualServicios.isSelected())
                     Simulacion = new Sistema(tabla,
-                                        1,
                                         Integer.parseInt(this.maxServidores.getText()),
                                         Integer.parseInt(this.duracion.getText()), 
                                         Integer.parseInt(this.maxClientes.getText()),
@@ -417,7 +416,6 @@ public class Parametros extends javax.swing.JFrame {
                                         this.salida);
                 else
                     Simulacion = new Sistema(tabla,
-                                        1,
                                         Integer.parseInt(this.maxServidores.getText()),
                                         Integer.parseInt(this.duracion.getText()), 
                                         Integer.parseInt(this.maxClientes.getText()),
@@ -429,7 +427,6 @@ public class Parametros extends javax.swing.JFrame {
             else
                 if(manualServicios.isSelected())
                     Simulacion = new Sistema(tabla,
-                                        1,
                                         Integer.parseInt(this.maxServidores.getText()),
                                         Integer.parseInt(this.duracion.getText()), 
                                         Integer.parseInt(this.maxClientes.getText()),
@@ -440,7 +437,6 @@ public class Parametros extends javax.swing.JFrame {
                                         this.salida);
                 else
                     Simulacion = new Sistema(tabla,
-                                        1,
                                         Integer.parseInt(this.maxServidores.getText()),
                                         Integer.parseInt(this.duracion.getText()), 
                                         Integer.parseInt(this.maxClientes.getText()),
@@ -449,7 +445,7 @@ public class Parametros extends javax.swing.JFrame {
                                         this.tablaLlegadasA,
                                         this.tablaServidoresA,
                                         this.salida);
-            Simulacion.iniciarSimulacion();
+            Simulacion.comenzarSimulacion();
             this.setVisible(false);
             salida.setVisible(true);
     }//GEN-LAST:event_siguienteActionPerformed

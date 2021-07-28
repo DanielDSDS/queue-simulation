@@ -28,7 +28,7 @@ public class TablaClientes {
     }
     
     public void generarTablaClientes(){
-       for(int i=0;i<=this.Lista_TELL.size();i++){
+       for(int i=0;i<this.Lista_TELL.size();i++){
          this.clientes.add(new Clientes(i,this.Lista_TELL.get(i),this.Lista_TS.get(i)));
        }
     }
@@ -52,7 +52,7 @@ public class TablaClientes {
       return this.clientes;
     }
     public int searchClientInServer(int indexS){
-      for(int i=0;i<=this.clientes.size();i++){
+      for(int i=0;i<this.clientes.size();i++){
           if(indexS==this.clientes.get(i).getNroS())
              return i;  
       }
@@ -62,6 +62,11 @@ public class TablaClientes {
     
     public ArrayList<Clientes> getTabla(){
       return this.clientes;
+    }
+
+    public Clientes getFromList(int index){
+      System.out.println("index " + index);
+      return this.clientes.get(index);
     }
     
 }

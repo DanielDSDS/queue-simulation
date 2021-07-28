@@ -13,11 +13,13 @@ import java.util.ArrayList;
  */
 public class Evento {
     private int AT; //Tiempo de llegada del cliente al sistema
-    private ArrayList<Integer> Lista_DT; //Lista de los tiempo de salida de cada servidor
+    private ArrayList<Integer> Lista_DT; //Lista de los tiempo de salida de cada servidor 
+    private ArrayList<Integer> Lista_AT; //Lista de los tiempo de entrada de cada cliente 
     
     public Evento(){
       this.AT=0;
       this.Lista_DT=new ArrayList<Integer>();
+      this.Lista_AT=new ArrayList<Integer>();
     };
     
     public int getAT(){
@@ -38,7 +40,7 @@ public class Evento {
     
     public int nextDeparture(){
        int nextD=999;
-       for(int i=0;i<=this.Lista_DT.size();i++){
+       for(int i=0;i<this.Lista_DT.size();i++){
            if(this.Lista_DT.get(i)<nextD)
               nextD=this.Lista_DT.get(i);
        }
@@ -48,7 +50,7 @@ public class Evento {
     public int nextExit(){
        int nextD=999;
        int indexS=0;
-       for(int i=0;i<=this.Lista_DT.size();i++){
+       for(int i=0;i<this.Lista_DT.size();i++){
            if(this.Lista_DT.get(i)<nextD){
               nextD=this.Lista_DT.get(i);
               indexS=i;

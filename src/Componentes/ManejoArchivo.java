@@ -65,12 +65,9 @@ public class ManejoArchivo {
     }
     
     public double obtenerValorDouble(String Linea,int pos){
-        String number = Linea.substring(0,pos);
-        double num=Double.parseDouble(number);
-        if(num>0){
-          num=num/100; 
-        }
-        return num;
+        int number = Integer.parseInt(Linea.substring(0,pos));
+        System.out.println("valor de numero " + number);
+        return number;
     }
     
     public void leerArchivoLlegadas(){

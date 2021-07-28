@@ -31,7 +31,6 @@ public class Sistema {
     private TablaEventos eventos;
   //---------------------------------------  
     private int finishTime;
-    private int numEtapa;
     private int numEvent;
     private int numClientEntrada;
     private int numClientSalida;
@@ -65,7 +64,7 @@ public class Sistema {
      * @param salida Representa la salida del sistemma
      */
       
-     public Sistema(TablaArrivals tablaArrival, int numEtapa, int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
+     public Sistema(TablaArrivals tablaArrival, int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
        this.timeModeling=tablaArrival.nextArrival();
        this.prevTimeModeling=0;
        this.variables=new TablaVariables();
@@ -84,7 +83,6 @@ public class Sistema {
        this.tablaSistema = new TablaArrivals();
        this.tablaArrival = tablaArrival;
        this.finishTime = finishTime;
-       this.numEtapa=numEtapa;
        this.numEvent=0;
        this.numClientEntrada=0;
        this.numClientSalida=0;
@@ -175,14 +173,20 @@ public class Sistema {
         this.numEvent=this.numEvent+1;
         if((this.eventos.getEvento().getAT()<this.eventos.getEvento().nextDeparture() 
            && this.timeModeling<this.finishTime
-           && this.numEtapa==1)
+           )
            ||
            (this.eventos.getEvento().getAT()<this.eventos.getEvento().nextDeparture() 
            && indexCliente<this.clientes.getTabla().size()
-           && this.numEtapa!=1)){
-          actualCliente=this.clientes.getTabla().get(indexCliente);
-          this.setTipoEvent("Llegada");
+           )){
+          System.out.println("condicion 1");
+          //equivalente a numClienteEntrada?
+          int nextArrival = this.eventos.getEvento().getAT();
+          System.out.println("indice llegada " + nextArrival);
+          System.out.println("indice cliente " + indexCliente);
+          indexCliente = this.clientes.searchClientInServer(nextArrival);
+          actualCliente = this.clientes.getFromList(indexCliente);
           this.simulacion.Add(this.numEvent,"LLegada",indexCliente);
+          this.setTipoEvent("Llegada");
           this.prevTimeModeling=this.timeModeling;
           this.setTimeModeling(actualCliente.getTELL());
           this.variables.getVariables().setTM(this.timeModeling);
@@ -207,9 +211,10 @@ public class Sistema {
           
         }
         else{
+          System.out.println("condicion 2 " );
           int indexS=this.eventos.getEvento().nextExit();
           indexCliente=this.clientes.searchClientInServer(indexS);
-          actualCliente=this.clientes.getTabla().get(indexCliente);
+          actualCliente=this.clientes.getFromList(indexCliente);
           this.simulacion.Add(this.numEvent,"Salida",indexCliente);
           this.prevTimeModeling=this.timeModeling;
           this.setTimeModeling(this.eventos.getEvento().nextDeparture());
@@ -331,7 +336,7 @@ public class Sistema {
      * @param unidad Unidad utilizada en la simulacion
      */
     public void imprimirEstadisticas(String unidad){
-        S.addInfo(this.E.toString(this.numEtapa,unidad));
+        S.addInfo(this.E.toString(1,unidad));
     }
     
     

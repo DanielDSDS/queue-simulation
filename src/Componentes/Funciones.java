@@ -71,7 +71,7 @@ public class Funciones {
         this.porcentajeUtilizacionGeneral = 0;
         this.relacionOptima = 0;
         this.porcentajeUtilizacion = new ArrayList<>();
-        for(int i=0;i<numServers;i++)
+        for(int i=0;i<=numServers;i++)
             this.porcentajeUtilizacion.add(0.0);
        
     };

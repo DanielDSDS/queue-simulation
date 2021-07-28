@@ -31,8 +31,9 @@ public class TablaDistribuciones {
    
    public void addTiempo(int t,double p){
        System.out.println("probabilidad: "+p+" tiempo: "+t);
+       System.out.println("acum "+proAcum);
      
-       if(proAcum<1){
+       if(proAcum < 100){
         this.proAcum=proAcum+p;
         this.tiempos.add(t);
         this.probabilidades.add(p);
@@ -51,7 +52,7 @@ public class TablaDistribuciones {
           }
        }
        else{
-         Alerta.mensajeError("La probabilidad acumulada a llegado al 100% ");
+         Alerta.mensajeError("La probabilidad acumulada ha llegado al 100% ");
        }
        System.out.println(this.toString());
    }
@@ -82,7 +83,8 @@ public class TablaDistribuciones {
     };
     
     public boolean completo(){
-        if(tabla.get(tabla.size()-1).getprobabilidadAcumulada()*100==100){
+       System.out.println("completo? " + tabla.get(tabla.size()-1).getprobabilidadAcumulada());
+        if(tabla.get(tabla.size()-1).getprobabilidadAcumulada()==100){
            return true;
         }
        return false;
@@ -101,7 +103,7 @@ public class TablaDistribuciones {
     
     @Override
     public String toString(){
-        String timeEntries = " Lista tiempo Llegadas: ";
+        String timeEntries = " Lista de tiempos: ";
         for (Distribuciones tiempo : this.tabla) {
             timeEntries = timeEntries+ "\n  " + tiempo.toString();
         }

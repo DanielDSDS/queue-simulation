@@ -310,14 +310,13 @@ public class Estadisticas {
     }
     
     public void calcularEstadisticasGenerales(Estadisticas e){
-        this.numEtapas= this.numEtapas+1;
         this.clientesNoEsperan=this.clientesNoEsperan+e.clientesNoEsperan;
         this.clientesSeVan = this.clientesSeVan + e.clientesSeVan;
         this.cantidadLlegadas = this.cantidadLlegadas + e.cantidadLlegadas;
         this.calcularProbabilidadEsperar();
         this.clientesEnCola = this.clientesEnCola + e.clientesEnCola;
         this.clientesEnSistema = this.clientesEnSistema + e.clientesEnSistema;
-        this.porcentajeUtilizacionGeneral = ((this.porcentajeUtilizacionGeneral*(this.numEtapas-1))+e.porcentajeUtilizacionGeneral)/this.numEtapas;
+        this.porcentajeUtilizacionGeneral = ((this.porcentajeUtilizacionGeneral)+e.porcentajeUtilizacionGeneral)/this.numEtapas;
         this.tiempoAdicional = e.tiempoAdicional;
         this.tiempoEnCola = this.tiempoEnCola + e.tiempoEnCola;
         this.tiempoEnSistema = this.tiempoEnSistema + e.tiempoEnSistema;
