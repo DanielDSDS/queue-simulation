@@ -100,7 +100,7 @@ public class Sistema {
                     this.E.actualizarClientesNoEsperan();
                     this.statusServer.addClient(this.statusServer.nextAvailableServer(), this.numClientEntrada);
                     int aleatorio = A.generarNumero();
-                    int tiempoServicio = this.tablaServicio.getValue(aleatorio);
+                    int tiempoServicio = this.tablaServicio.getTiempo(aleatorio);
                     this.E.tiempoDeServicio(tiempoServicio);
                     this.departureTime.addDeparture(this.timeModeling+tiempoServicio,tiempoServicio,this.numClientEntrada);
                     this.salidasSistema.addArrival(this.timeModeling+tiempoServicio,this.numClientEntrada);
@@ -109,7 +109,7 @@ public class Sistema {
                 this.tablaArrival.subArrival(this.numClientEntrada);
                 if(this.numEtapa==1){
                     int aleatorio = A.generarNumero();
-                    int tiempoLlegada = this.tablaLLegadas.getValue(aleatorio);
+                    int tiempoLlegada = this.tablaLLegadas.getTiempo(aleatorio);
                     this.E.tiempoEntreLlegadas(tiempoLlegada);
                     this.tablaArrival.addArrival(this.timeModeling+tiempoLlegada,this.numClientEntrada+1);
                 }           
@@ -135,7 +135,7 @@ public class Sistema {
                     int cliente = this.waitingLength.subWaiting();
                     this.statusServer.addClient(servidor,cliente);
                     int aleatorio = A.generarNumero();
-                    int tiempoServicio = this.tablaServicio.getValue(aleatorio);
+                    int tiempoServicio = this.tablaServicio.getTiempo(aleatorio);
                     this.E.tiempoDeServicio(tiempoServicio);
                     this.departureTime.addDeparture(this.timeModeling+tiempoServicio,tiempoServicio,cliente);
                     this.salidasSistema.addArrival(this.timeModeling+tiempoServicio,cliente);

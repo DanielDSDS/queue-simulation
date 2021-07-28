@@ -90,6 +90,14 @@ public class TablaDistribuciones {
     public ArrayList<Distribuciones> getTabla(){
       return this.tabla;
     }
+
+    public int getTiempo(int random){
+        for(int i=0;i<this.tabla.size();i++){
+            if(random>=this.tabla.get(i).getValorMin() && random<=this.tabla.get(i).getvalorMax())
+                return this.tabla.get(i).gettiempo();
+        }
+        return 0;
+    }
     
     @Override
     public String toString(){
