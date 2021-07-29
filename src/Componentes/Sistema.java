@@ -134,12 +134,14 @@ public class Sistema {
       do{
       
         this.numEvent=this.numEvent+1;
+        System.out.println("Index Cliente: "+indexCliente);
         System.out.println("Cantidad de clientes " + this.variables.getVariables().getCantClientes());
         System.out.println("--allIngresados " + this.clientes.allIngresados());
         System.out.println("--AT " + this.eventos.getEvento().getAT());
         System.out.println("--DT " + this.eventos.getEvento().nextSalida());
 
         if((this.eventos.getEvento().getAT()<this.eventos.getEvento().nextSalida() 
+           && indexCliente<this.clientes.getTabla().size()     
            && this.timeModeling<this.finishTime
            && this.variables.getVariables().getCantClientes()<this.numClientMax
            && this.clientes.allIngresados()==false
@@ -174,8 +176,11 @@ public class Sistema {
             this.addClient();
             this.variables.getVariables().upCantClientes();
             this.variables.getVariables().upWL();
-            System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL()+")");  
-            this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+            if(indexCliente<this.clientes.getTabla().size()-1){ 
+              System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL()+")");  
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+             }
+             else System.out.println("Ultimo cliente ingresado");
           } else {
             //----------------- Hay servidores disponibles - Se atiende el cliente ------------------------ 
             this.addClient();
@@ -192,8 +197,11 @@ public class Sistema {
             } else {
               //Si no es el primer evento se suma el TELL con TM  
               //Suma de TM con TELL 
+             if(indexCliente<this.clientes.getTabla().size()-1){ 
               System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL()+")");  
               this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+             }
+             else System.out.println("Ultimo cliente ingresado");
             }
      
           
@@ -246,6 +254,7 @@ public class Sistema {
             
           } else {
             this.eventos.getEvento().updateDT(indexS,999);
+            this.variables.getVariables().setStatusServidor(indexS,true);
           }
           System.out.println("////////////////Fin salida");
         }
