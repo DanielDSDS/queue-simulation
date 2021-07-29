@@ -135,9 +135,9 @@ public class Sistema {
       
         this.numEvent=this.numEvent+1;
         System.out.println("Cantidad de clientes " + this.variables.getVariables().getCantClientes());
-        System.out.println("allIngresados " + this.clientes.allIngresados());
-        System.out.println("nextLlegada " + this.eventos.getEvento().getAT());
-        System.out.println("nextSalida " + this.eventos.getEvento().nextSalida());
+        System.out.println("--allIngresados " + this.clientes.allIngresados());
+        System.out.println("--AT " + this.eventos.getEvento().getAT());
+        System.out.println("--DT " + this.eventos.getEvento().nextSalida());
 
         if((this.eventos.getEvento().getAT()<this.eventos.getEvento().nextSalida() 
            && this.timeModeling<this.finishTime
@@ -150,6 +150,7 @@ public class Sistema {
            && this.variables.getVariables().getCantClientes()<this.numClientMax     
            && this.clientes.allIngresados()==false     
            )){
+          //----------------- Llegada ------------------------ 
           System.out.println("///////////////Llegada");
           System.out.println("///////////////TM: " + this.timeModeling);
           actualCliente = this.clientes.getFromList(indexCliente);
@@ -163,6 +164,7 @@ public class Sistema {
           this.F.actualizarPorcentajes(this.prevTimeModeling, this.timeModeling,this.variables.getVariables().getListaSS()); 
           int indexServer=this.variables.getVariables().getAvaibleServer();
           if(indexServer==-1){
+            //----------------- Todos los servidores estan ocupados - Se coloca en cola ------------------------ 
             //---------------------------------------- BUG 1
             //En esta condicion esta uno de los bugs 
             //Al entrar en esta condicion TM nunca incrementa y solo llegan clientes
@@ -173,23 +175,34 @@ public class Sistema {
             this.variables.getVariables().upCantClientes();
             this.variables.getVariables().upWL();
           } else {
+            //----------------- Hay servidores disponibles - Se atiende el cliente ------------------------ 
             this.addClient();
             this.variables.getVariables().upCantClientes();
-            this.variables.getVariables().setStatusServidor(indexServer,false);
+            //this.variables.getVariables().setStatusServidor(indexServer,false);
+            //Suma de TM con DT 
+            System.out.println("Se actualiza DT con la suma de TM("+this.timeModeling+") y TS("+actualCliente.getTS()+")");  
             this.eventos.getEvento().updateDT(indexServer,actualCliente.getTS()+this.timeModeling);
-            if(this.numEvent==0)
-             //this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
-             this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
-            else
-             //this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
-             this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+            //Si es el primer evento AT es el TELL directamente
+            if(this.numEvent==0){
+              System.out.println("Se actualiza AT con TELL("+this.clientes.getTabla().get(indexCliente).getTELL());  
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente).getTELL());
+            } else {
+              //Si no es el primer evento se suma el TELL con TM  
+              //Suma de TM con TELL 
+              System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente).getTELL()+")");  
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente).getTELL()+this.timeModeling);
+            }
             actualCliente.setNroS(indexServer);
             indexCliente=indexCliente+1;
           }
+          System.out.println("Se actualiza TM con la AT("+this.eventos.getEvento().getAT()+")");  
           this.setTimeModeling(this.eventos.getEvento().getAT());
-        } else if(this.timeModeling<this.finishTime && indexCliente<this.clientes.getTabla().size()) {
+          System.out.println("--TM actualizado: " + this.eventos.getEvento().getAT());
+          System.out.println("////////////////Fin llegada");
+        } else {
+          //----------------------------------- Salida ------------------------------------------------ 
           int indexS=this.eventos.getEvento().nextExit();
-          System.out.println("////////////////Salida del server: " + indexS);
+          System.out.println("////////////////Salida por el server: " + indexS);
           System.out.println("///////////////TM: " + this.timeModeling);
           //----------------------------------------- BUG 2
           //Cuando se llega a la cantidad de clientes maxima
@@ -203,35 +216,38 @@ public class Sistema {
           actualCliente.setNroS(-2);
           this.simulacion.Add(this.numEvent,"Salida",indexCliente);
           this.prevTimeModeling=this.timeModeling;
+          System.out.println("Se actualiza TM con la DT("+this.eventos.getEvento().nextSalida()+")");  
           this.setTimeModeling(this.eventos.getEvento().nextSalida());
+          System.out.println("--TM actualizado: " + this.eventos.getEvento().nextSalida());
           this.variables.getVariables().setTM(this.timeModeling);
           this.F.actualizarCantidadClientesEnSistema(this.prevTimeModeling,this.timeModeling,this.numClientSistem);
           this.F.actualizarCantidadClientesEnCola(this.prevTimeModeling, this.timeModeling, this.Lista_espera.size());
           this.subClientSistem();
-          
           this.variables.getVariables().susCantClientes();
           this.F.actualizarTiempoClienteEnSistema(actualCliente.getTELL(),this.eventos.getEvento().nextSalida(),indexCliente);
           this.F.actualizarTiempoClienteEnCola(actualCliente.getTELL(),this.eventos.getEvento().nextSalida(),actualCliente.getTS(),indexCliente);
           this.F.actualizarPorcentajes(this.prevTimeModeling, this.timeModeling, this.variables.getVariables().getListaSS());
     
+          //---------------------------- La cola de espera no esta vacia ------------------------------
           if(!this.Lista_espera.isEmpty()){
-           int clienteCola=this.Lista_espera.get(indexCola);
-           this.Lista_espera.remove(indexCola);
+            int clienteCola=this.Lista_espera.get(indexCola);
+            this.Lista_espera.remove(indexCola);
        
             this.clientes.getTabla().get(clienteCola).setNroS(indexS);
             this.F.tiempoDeServicio(this.clientes.generarTabla().get(clienteCola).getTS());
+            //Suma de TM con TS 
+            System.out.println("Se actualiza DT con la suma de TM("+this.timeModeling+") y TS("+this.clientes.generarTabla().get(clienteCola).getTS()+")");  
             this.eventos.getEvento().updateDT(indexS,this.clientes.generarTabla().get(clienteCola).getTS()+this.timeModeling);
             indexCola=indexCola+1;
             indexCliente=indexCliente+1;  
-          }
-          else{
+          } else {
             this.eventos.getEvento().updateDT(indexS,999);
           }
-      
+          System.out.println("////////////////Fin salida");
         }
         this.eventos.updateRegistro();
         this.variables.updateRegistro();
-     }while((this.timeModeling<this.finishTime || this.variables.getVariables().getCantClientes()!=0|| !this.Lista_espera.isEmpty()) && !this.clientes.allDespachados());
+     } while ((this.timeModeling<this.finishTime || this.variables.getVariables().getCantClientes()!=0|| !this.Lista_espera.isEmpty()) && !this.clientes.allDespachados());
      this.F.CalcularPromedios(this.timeModeling);
      this.F.calcularTiempoAdicional(timeModeling, finishTime);
      this.F.relacionOptima(costoEsperaClient, costoDeServidor);
@@ -331,7 +347,7 @@ public class Sistema {
      * @param timeModeling Tiempo de Modelo 
      */
     public void setTimeModeling(int timeModeling) {
-        this.timeModeling = timeModeling;
+  this.timeModeling = timeModeling;
     }
     //-----------------------------------------------------Arrival Time
 
