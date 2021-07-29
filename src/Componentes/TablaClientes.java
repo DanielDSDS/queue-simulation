@@ -51,8 +51,11 @@ public class TablaClientes {
       
       return this.clientes;
     }
+
     public int searchClientInServer(int indexS){
       for(int i=0;i<this.clientes.size();i++){
+        //System.out.println("Listando clientes: " + this.clientes.get(i).getNroS());
+        //System.out.println("Listando clientes: " + this.clientes.get(i));
           if(indexS==this.clientes.get(i).getNroS())
              return i;  
       }
@@ -65,7 +68,6 @@ public class TablaClientes {
     }
 
     public Clientes getFromList(int index){
-      System.out.println("index " + index);
       return this.clientes.get(index);
     }
    
