@@ -74,7 +74,7 @@ public class Evento {
     }
     public void updateDT(int i,int dt){
       this.lista_DT.set(i, dt);
-      System.out.println("--DT actualizado: " + this.lista_DT.get(i));  
+      System.out.println("--DT actualizado del servidor"+i+": " + this.lista_DT.get(i));  
     }
     
 }
