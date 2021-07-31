@@ -6,41 +6,28 @@
 package Componentes;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
-/**
- * Clase que contiene todas las funciones para la obtencion de datos en la simulacion 
- * usando los parametros de entrada
- * @author Daniel Bermudez
- */
 public class Funciones {
-    //Nose si vamos a requerir esto pero ahi lo marco
-    private double llegadasPromedio;
-    private double tiempoEntreLLegadas;
-    private double tiempoEntreLLegadasPromedio;
-    private int cantidadLlegadas;
-    
-    private double salidasPromedio;
-    private double tiempoDeServicio;
-    private double tiempoDeServicioPromedio;
-    private int cantidadServicio;
-    //---------------------------------------------
-    
-
-    
-    private double clientesNoEsperan;
-   
-    private double clientesSeVan;
-    
-    private double probabilidadDeEsperar;
-    
-    private double clientesEnCola;
-    private double clientesEnSistema;
-    private double tiempoEnCola;
-    private double tiempoEnSistema;
-    private double tiempoAdicional;
-    private ArrayList<Double> porcentajeUtilizacion;
-    private double porcentajeUtilizacionGeneral;
-    private double relacionOptima;
+    public double llegadasPromedio;
+    public double tiempoEntreLLegadas;
+    public double tiempoEntreLLegadasPromedio;
+    public int cantidadLlegadas;
+    public double salidasPromedio;
+    public double tiempoDeServicio;
+    public double tiempoDeServicioPromedio;
+    public int cantidadServicio;
+    public double clientesNoEsperan;
+    public double clientesSeVan;
+    public double probabilidadDeEsperar;
+    public double clientesEnCola;
+    public double clientesEnSistema;
+    public double tiempoEnCola;
+    public double tiempoEnSistema;
+    public double tiempoAdicional;
+    public ArrayList<Double> porcentajeUtilizacion;
+    public double porcentajeUtilizacionGeneral;
+    public double relacionOptima;
  
     
      public Funciones(int numServers) {
@@ -71,24 +58,24 @@ public class Funciones {
         this.porcentajeUtilizacionGeneral = 0;
         this.relacionOptima = 0;
         this.porcentajeUtilizacion = new ArrayList<>();
-        for(int i=0;i<numServers;i++)
+        for(int i=0;i<=numServers;i++)
             this.porcentajeUtilizacion.add(0.0);
        
     };
      
     public void CalcularPromedios(int timeModeling){
-        //this.tiempoEntreLLegadasPromedio();
-        //this.llegadasPromedio();
-        //this.tiempoDeServicioPromedio();
-        //this.salidasPromedio();
+        this.tiempoEntreLLegadasPromedio();
+        this.llegadasPromedio();
+        this.tiempoDeServicioPromedio();
+        this.salidasPromedio();
         //this.CalcularEstabilidad();
-        //this.calcularProbabilidadEsperar();
-        //this.calcularCantidadPromedioClientesEnCola(timeModeling);
-        //this.calcularCantidadPromedioClientesEnSistema(timeModeling);
-        //this.calcularTiempoPromedioClienteEnSistema();
-        //this.calcularTiempoPromedioClienteEnCola();
-        //this.calcularPorcentajeUtilizacion(timeModeling);
-        //this.calcularPorcentajeUtilizacionGeneral();
+        this.calcularProbabilidadEsperar();
+        this.calcularCantidadPromedioClientesEnCola(timeModeling);
+        this.calcularCantidadPromedioClientesEnSistema(timeModeling);
+        this.calcularTiempoPromedioClienteEnSistema();
+        this.calcularTiempoPromedioClienteEnCola();
+        this.calcularPorcentajeUtilizacion(timeModeling);
+        this.calcularPorcentajeUtilizacionGeneral();
     };
     
     public void setValoresEntrada(TablaDistribuciones tabla){
@@ -112,17 +99,14 @@ public class Funciones {
         }
     }
     
-   /* 
     public void tiempoEntreLLegadasPromedio(){
         this.tiempoEntreLLegadasPromedio=this.tiempoEntreLLegadas/this.cantidadLlegadas;
     }
-   */
     
-   /* 
     private void llegadasPromedio(){
         this.llegadasPromedio=1/this.tiempoEntreLLegadasPromedio;
     }
-   */  
+
     public void tiempoDeServicio(int tiempo){
         if(this.tiempoDeServicio==0){
             this.tiempoDeServicio=tiempo;
@@ -133,36 +117,24 @@ public class Funciones {
         }
     }
     
-    /*
     public void tiempoDeServicioPromedio(){
         this.tiempoDeServicioPromedio = this.tiempoDeServicio/this.cantidadServicio;
     }
-    */
     
-    /*
     private void salidasPromedio(){
         this.salidasPromedio=1/this.tiempoDeServicioPromedio;
     }
-    */
    
      public void actualizarClientesNoEsperan(){
         this.clientesNoEsperan=this.clientesNoEsperan+1;
     }
     
-    /**
-     * Cantidad de clientes que se van del sistema en caso de que este en su 
-     * capacidad maxima a la hora de llegada
-     */
     public void actualizarClientesSeVan(){
         this.clientesSeVan=this.clientesSeVan+1;
     }
     
-    /**
-     * Actualiza la probabilidad de esperar de los clientes cuando llegan 
-     * a la etapa
-     */
     public void calcularProbabilidadEsperar(){
-        this.probabilidadDeEsperar=(this.cantidadLlegadas-this.clientesNoEsperan-this.clientesSeVan)/this.cantidadLlegadas;
+        this.probabilidadDeEsperar = Math.abs((this.cantidadLlegadas-this.clientesNoEsperan-this.clientesSeVan)/this.cantidadLlegadas);
     }
     
     public void actualizarCantidadClientesEnCola(int prev, int actual,int waitingLength){
@@ -225,22 +197,13 @@ public class Funciones {
         }
     }
     
-     /**
-     * Actualiza el procentaje de utilizacion en general del sistema 
-     */
     public void calcularPorcentajeUtilizacionGeneral(){
         double valorSumado=0;
         for(int i=0;i<this.porcentajeUtilizacion.size();i++)
             valorSumado = valorSumado + this.porcentajeUtilizacion.get(i);
         this.porcentajeUtilizacionGeneral = valorSumado/this.porcentajeUtilizacion.size();
     }
-    
-    /**
-     * Actualiza los porcentajes de utilizacion de cada uno de los servidores
-     * @param prevTimeModeling
-     * @param timeModeling
-     * @param statusServer
-     */
+
     public void actualizarPorcentajes(int prevTimeModeling, int timeModeling,ArrayList<Boolean> statusServer){
         for(int i=0;i<statusServer.size();i++){
             int uso;
@@ -251,79 +214,33 @@ public class Funciones {
             this.actualizarPorcentajeUtilizacion(prevTimeModeling,timeModeling,i,uso);
         }
     }
-    
-    public void calcularEstadisticasGenerales(Funciones e){
-        this.clientesNoEsperan=this.clientesNoEsperan+e.clientesNoEsperan;
-        this.clientesSeVan = this.clientesSeVan + e.clientesSeVan;
-        this.cantidadLlegadas = this.cantidadLlegadas + e.cantidadLlegadas;
-        this.calcularProbabilidadEsperar();
-        this.clientesEnCola = this.clientesEnCola + e.clientesEnCola;
-        this.clientesEnSistema = this.clientesEnSistema + e.clientesEnSistema;
-        //this.porcentajeUtilizacionGeneral = ((this.porcentajeUtilizacionGeneral*(this.numEtapas-1))+e.porcentajeUtilizacionGeneral)/this.numEtapas;
-        this.tiempoAdicional = e.tiempoAdicional;
-        this.tiempoEnCola = this.tiempoEnCola + e.tiempoEnCola;
-        this.tiempoEnSistema = this.tiempoEnSistema + e.tiempoEnSistema;
-    }
-    
-    public void actualizarEstadisticasPromedio(Funciones e){
-        this.llegadasPromedio = this.llegadasPromedio + e.llegadasPromedio;
-        this.tiempoEntreLLegadas = this.tiempoEntreLLegadas + e.tiempoEntreLLegadas;
-        this.tiempoEntreLLegadasPromedio= this.tiempoEntreLLegadasPromedio+ e.tiempoEntreLLegadasPromedio;
-        this.cantidadLlegadas= this.cantidadLlegadas + e.cantidadLlegadas;
-        
-        this.salidasPromedio=this.salidasPromedio + e.salidasPromedio;
-        this.tiempoDeServicio=this.tiempoDeServicio + e.salidasPromedio;
-        this.tiempoDeServicioPromedio= this.tiempoDeServicioPromedio+ e.tiempoDeServicioPromedio;
-        this.cantidadServicio=this.cantidadServicio+e.cantidadServicio;
-        
 
-        this.clientesNoEsperan = this.clientesNoEsperan + e.clientesNoEsperan;
-        this.clientesSeVan = this.clientesSeVan+e.clientesSeVan;
-        
-        this.probabilidadDeEsperar = this.probabilidadDeEsperar+e.probabilidadDeEsperar;
-        
-        this.clientesEnCola = this.clientesEnCola+e.clientesEnCola;
-        this.clientesEnSistema = this.clientesEnSistema+e.clientesEnSistema;
-        
-        this.tiempoEnCola = this.tiempoEnCola+e.tiempoEnCola;
-        this.tiempoEnSistema = this.tiempoEnSistema+e.tiempoEnSistema;
-        
-        this.tiempoAdicional = this.tiempoAdicional+e.tiempoAdicional;
-        
-        this.porcentajeUtilizacionGeneral = this.porcentajeUtilizacionGeneral+e.porcentajeUtilizacionGeneral;
-        this.relacionOptima = this.relacionOptima+e.relacionOptima;
-        for(int i=0;i<e.porcentajeUtilizacion.size();i++)
-            this.porcentajeUtilizacion.set(i, this.porcentajeUtilizacion.get(i)+e.porcentajeUtilizacion.get(i)); 
-    }
-    
-    public void calcularEstadisticasPromedio(int tiempo){
-        this.llegadasPromedio = this.llegadasPromedio/tiempo;
-        this.tiempoEntreLLegadas = this.tiempoEntreLLegadas/tiempo;
-        this.tiempoEntreLLegadasPromedio= this.tiempoEntreLLegadasPromedio/tiempo;
-        this.cantidadLlegadas= this.cantidadLlegadas/tiempo;
-        
-        this.salidasPromedio=this.salidasPromedio/tiempo;
-        this.tiempoDeServicio=this.tiempoDeServicio/tiempo;
-        this.tiempoDeServicioPromedio= this.tiempoDeServicioPromedio/tiempo;
-        this.cantidadServicio=this.cantidadServicio/tiempo;
-        
+    public String toString(String unidad) {
+        DecimalFormat numberFormat = new DecimalFormat("0.00");
+        String porcentajeUtilizacionUnitario = "";
+        for (int i=0;i<this.porcentajeUtilizacion.size();i++) {
+            porcentajeUtilizacionUnitario = porcentajeUtilizacionUnitario +"  Servidor "+ (i+1) + ": " +
+                    (this.porcentajeUtilizacion.get(i)*100)+" %,";
+        }
+        return  "\n   Estadisticas :" +
+                
+                "\n   Cantidad de Llegadas = " + cantidadLlegadas + " llegadas" +
+                "\n   Cantidad de Salidas = " + cantidadServicio + " salidas." +
 
-        this.clientesNoEsperan = this.clientesNoEsperan/tiempo;
-        this.clientesSeVan = this.clientesSeVan/tiempo;
-        
-        this.probabilidadDeEsperar = this.probabilidadDeEsperar/tiempo;
-        
-        this.clientesEnCola = this.clientesEnCola/tiempo;
-        this.clientesEnSistema = this.clientesEnSistema/tiempo;
-        
-        this.tiempoEnCola = this.tiempoEnCola/tiempo;
-        this.tiempoEnSistema = this.tiempoEnSistema/tiempo;
-        
-        this.tiempoAdicional = this.tiempoAdicional/tiempo;
-        
-        this.porcentajeUtilizacionGeneral = this.porcentajeUtilizacionGeneral/tiempo;
-        this.relacionOptima = this.relacionOptima/tiempo;
-        for(int i=0;i<this.porcentajeUtilizacion.size();i++)
-            this.porcentajeUtilizacion.set(i, this.porcentajeUtilizacion.get(i)/tiempo); 
+                "\n   Llegadas Promedio = " + numberFormat.format(llegadasPromedio) + " llegadas" + " por " + unidad +
+                "\n   Salidas Promedio = " + numberFormat.format(salidasPromedio) +  " salidas." + " por " + unidad +
+
+                "\n\n   Cantidad de veces que un clientes no espero = " + clientesNoEsperan + " veces."+
+                "\n   Cantidad de veces que un cliente se fue = " + clientesSeVan + " veces."+
+                "\n   Cantidad de clientes promedio en cola = " + clientesEnCola + " clientes."+ 
+                "\n   Cantidad de clientes promedio en el sistema = " + clientesEnSistema + " clientes."+
+                "\n   Probabilidad de un cliente de esperar = " + numberFormat.format(100 - probabilidadDeEsperar*100) + "%." +
+                "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(porcentajeUtilizacionGeneral*100) + "%." +
+
+                "\n\n   Tiempo entre LLegadas Promedio = " + tiempoEntreLLegadasPromedio + " por " + unidad +
+                "\n   Tiempo de Servicio Promedio = " + tiempoDeServicioPromedio +  " " + unidad + "." +
+                "\n   Tiempo adicional que el sistema estuvo abierto = " + tiempoAdicional + " " + unidad + "." +
+                "\n   Tiempo promedio de un cliente en cola = " + tiempoEnCola + " " + unidad + "." +
+                "\n   Tiempo promedio de un cliente en sistema = " + tiempoEnSistema + " " + unidad + "."; 
     }
 }

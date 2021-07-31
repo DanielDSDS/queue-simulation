@@ -45,8 +45,7 @@ public class Distribuciones {
     };
     
     public double getvalorMax(){
-      this.valorMax=(this.probalidadAcumulada*100)-1;  
-      return this.valorMax;
+      return this.probalidadAcumulada - 1;
     };
     
     public double getValorMin(){
@@ -59,7 +58,7 @@ public class Distribuciones {
     
     @Override
     public String toString() {
-        return "Valor=" + this.tiempo + ", Porcentaje=" + this.probabilidad*100 + ", Porcentaje acumulado=" + this.probalidadAcumulada*100 + ", Intervalo= [" + this.valorMin + "," + this.getvalorMax() + "]";
+        return "Valor=" + this.tiempo + ", Porcentaje=" + this.probabilidad + ", Porcentaje acumulado=" + this.probalidadAcumulada + ", Intervalo= [" + this.valorMin + "," + this.getvalorMax() + "]";
     }
 
 }

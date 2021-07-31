@@ -13,11 +13,7 @@ import java.util.ArrayList;
  * @author Daniel Bermudez
  */
 public class TablaSimulacion {
-    ArrayList<Simulacion> Lista_Simulacion;
-    
-    public TablaSimulacion(){
-      ArrayList<Simulacion> Lista_Simulacion=new ArrayList<Simulacion>();
-    };
+    ArrayList<Simulacion> Lista_Simulacion = new ArrayList<Simulacion>();
     
     public void Add(int NroE,String Tipo,int NroC){
        Simulacion s=new Simulacion(NroE,Tipo,NroC);
@@ -26,6 +22,10 @@ public class TablaSimulacion {
     
     public ArrayList<Simulacion> getTabla(){
       return this.Lista_Simulacion;
+    }
+    
+    public int getNroEventoActual(){
+        return this.Lista_Simulacion.get(this.Lista_Simulacion.size()).getNro_Evento();
     }
     
     

@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * @author Daniel Bermudez
  */
 public class TablaEventos {
-    public Evento evento;
+    private Evento evento;
     //Lleva un registro de los cambios de las variables de evento
-    public ArrayList<Evento> registro_eventos; 
+    private ArrayList<Evento> registro_eventos; 
     
     public TablaEventos(){
       this.evento=new Evento();

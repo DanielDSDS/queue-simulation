@@ -30,7 +30,7 @@ public class TablaVariables {
        this.registro_variables.add(this.variables);
     }
     
-    public Variables getVaribales(){
+    public Variables getVariables(){
        return this.variables;
     }
     

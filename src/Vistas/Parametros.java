@@ -30,9 +30,7 @@ public class Parametros extends javax.swing.JFrame {
     private int valorCostoCliente;
     private int valorCostoServidor;
     private int seleccion;
-    /**
-     * Creates new form Prueba
-     */
+    
     public Parametros() {
         initComponents();
     }
@@ -281,7 +279,7 @@ public class Parametros extends javax.swing.JFrame {
       
         simular.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         simular.setText("Simular");
-        jPanel1.add(simular, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 790, 120, 30));
+        jPanel1.add(simular, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 800, 120, 30));
         simular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simularActionPerformed(evt);
@@ -383,11 +381,11 @@ public class Parametros extends javax.swing.JFrame {
         }
         
         if(manualLlegada.isSelected() && !this.tablaLlegadasM.completo()){
-            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
+            Alerta.mensajeError("El tiempo entre llegadas no tiene el % introducido completo");
             return;
         }
         if(archivoLlegada.isSelected() && !this.tablaLlegadasA.completo()){
-            Alerta.mensajeError("El tiempo entre llegadas no fue introducido");
+            Alerta.mensajeError("El tiempo entre llegadas no tiene el % introducido completo");
             return;
         }
         
@@ -405,66 +403,18 @@ public class Parametros extends javax.swing.JFrame {
 
         if(this.seleccion==0)
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,
-                                        1,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasM,
-                                        this.tablaServidoresM,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,
-                                        1,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasM,
-                                        this.tablaServidoresA,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresA,this.salida);
             else
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,
-                                        1,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasA,
-                                        this.tablaServidoresM,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,
-                                        1,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasA,
-                                        this.tablaServidoresA,
-                                        this.salida);
-            Simulacion.iniciarSimulacion();
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresA,this.salida);
+            Simulacion.comenzarSimulacion(this.getUnidad());
             this.setVisible(false);
             salida.setVisible(true);
     }//GEN-LAST:event_siguienteActionPerformed
-
-    public int determinarNumeroCiclos(){
-        if(this.getUnidadTiempo().equals("DIAS"))
-            return this.DIA*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("SEMANAS"))
-            return this.SEMANA*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("MESES"))
-            return this.MES*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("AÑOS"))
-            return this.YEAR*this.getValorDuracion();
-        return 1;  
-    }
 
     public int getValorDuracion() {
         return valorDuracion;
@@ -486,7 +436,7 @@ public class Parametros extends javax.swing.JFrame {
         return (String)unidadTiempo.getSelectedItem();
     }
 
-    private void agregarLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLlegadaActionPerformed
+    private void agregarLlegadaActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
         if(!Numerico.isNumeric(this.valorLlegada.getText())){
             Alerta.mensajeError("El parametro: VALOR LLEGADA, no es numerico");
@@ -512,7 +462,7 @@ public class Parametros extends javax.swing.JFrame {
         }
         this.tablaLlegadasM.addTiempo(Integer.parseInt(this.valorLlegada.getText()),Double.parseDouble(this.porcentajeLlegada.getText())/100);
         this.tablaLlegadasManual.setText(this.tablaLlegadasM.toString());
-    }//GEN-LAST:event_agregarLlegadaActionPerformed
+    }                                              
 
     private void agregarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLlegadaActionPerformed
         // TODO add your handling code here:
@@ -551,12 +501,12 @@ public class Parametros extends javax.swing.JFrame {
                 this.unidadTiempo.addItem(this.unidad.getItemAt(i));
     }//GEN-LAST:event_unidadActionPerformed
 
-    private void leerArchivoLlegadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
+    private void leerArchivoLlegadaActionPerformed(java.awt.event.ActionEvent evt) {                                            
         ManejoArchivo M = new ManejoArchivo();
         M.leerArchivoLlegadas();
         this.tablaLlegadasA = M.getTablaLlegadas();
         this.tablaLlegadasArchivo.setText(tablaLlegadasA.toString());
-    }//GEN-LAST:event_leerArchivoActionPerformed
+    }                                           
 
     private void leerArchivoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerArchivoActionPerformed
         ManejoArchivo M = new ManejoArchivo();

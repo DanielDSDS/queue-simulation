@@ -41,13 +41,13 @@ public class TablaDepartures {
      * Obtiene el valor del proximo cliente a salir de la etapa o sistema
      * @return Valor de salida del proximo cliente
      */
-    public int nextDeparture(){
-        int nextDeparture=9999;
+    public int nextSalida(){
+        int nextSalida=9999;
         for(int i=0;i<this.departureTimes.size();i++){
-            if(this.departureTimes.get(i).getDepartureTime()<nextDeparture)
-                nextDeparture=this.departureTimes.get(i).getDepartureTime();
+            if(this.departureTimes.get(i).getDepartureTime()<nextSalida)
+                nextSalida=this.departureTimes.get(i).getDepartureTime();
         }
-        return nextDeparture;
+        return nextSalida;
     }
     
     /**
@@ -55,9 +55,9 @@ public class TablaDepartures {
      * @return Numero del cliente
      */
     public int nextClient(){
-        int nextDeparture = this.nextDeparture();
+        int nextSalida = this.nextSalida();
         for(int i=0;i<this.departureTimes.size();i++){
-            if(this.departureTimes.get(i).getDepartureTime()==nextDeparture)
+            if(this.departureTimes.get(i).getDepartureTime()==nextSalida)
                 return this.departureTimes.get(i).getNumCliente();
         }
         return 0;
@@ -69,9 +69,9 @@ public class TablaDepartures {
      * @return Valor del tiempo de servicio del cliente
      */
     public int nextService(){
-        int nextDeparture = this.nextDeparture();
+        int nextSalida = this.nextSalida();
         for(int i=0;i<this.departureTimes.size();i++){
-            if(this.departureTimes.get(i).getDepartureTime()==nextDeparture)
+            if(this.departureTimes.get(i).getDepartureTime()==nextSalida)
                 return this.departureTimes.get(i).getTiempoServicio();
         }
         return 0;

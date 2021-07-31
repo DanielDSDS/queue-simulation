@@ -6,6 +6,8 @@
 package Vistas;
 
 import Componentes.ManejoArchivo;
+import Componentes.Funciones;
+import java.text.DecimalFormat;
 
 public class Salida extends javax.swing.JFrame {
 
@@ -17,6 +19,25 @@ public class Salida extends javax.swing.JFrame {
     
     public void addInfo(String info){
         this.tabla.setText(this.tabla.getText()+ info);
+    }
+
+    public void setLabelsText(Funciones est, String unidad) {
+      DecimalFormat numberFormat = new DecimalFormat("0.00");
+      this.labelClientesLlegaron.setText("Cantidad de clientes que llegaron: " + est.cantidadLlegadas);  
+      this.labelClientesSalieron.setText("Cantidad de servicio: " + est.cantidadServicio);  
+      this.labelLlegadasPromedio.setText("Promedio de llegadas: " + numberFormat.format(est.llegadasPromedio) + " por " + unidad);  
+      this.labelSalidasPromedio.setText("Promedio de llegadas: " + numberFormat.format(est.salidasPromedio) + " por " + unidad);  
+      this.labelClientesSinEspera.setText("Cantidad de veces que clientes no esperaron: " + est.clientesNoEsperan);  
+      this.labelClientesSeVa.setText("Cantidad de veces que cliente se va: " + est.clientesSeVan);  
+      this.labelClientePromedioEnCola.setText("Promedio de clientes en cola : " + est.clientesEnCola);
+      this.labelClientePromedioSistema.setText("Promedio de clientes en el sistema : " + est.clientesEnSistema);
+      this.labelPorcentajeUtilizacion.setText("Porcentaje de utilizacion del sistema : " + numberFormat.format(est.porcentajeUtilizacionGeneral*100) + "%");
+      this.labelClienteEspera.setText("Probabilidad de un cliente de esperar : " + numberFormat.format(100 - est.probabilidadDeEsperar*100) + "%");
+      this.labelTiempoEntreLlegadasPromedio.setText("Tiempo entre llegada promedio : " + est.tiempoEntreLLegadasPromedio + " " + unidad);
+      this.labelTiempoServicioPromedio.setText("Tiempo de servicio promedio : " + est.tiempoDeServicioPromedio + " " + unidad);
+      this.labelTiempoAdicional.setText("Tiempo adicional que el sistema estuvo abierto : " + est.tiempoAdicional + " " + unidad);
+      this.labelTiempoColaPromedio.setText("Tiempo promedio de un cliente en cola : " + est.tiempoEnCola + " " + unidad);
+      this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + est.tiempoEnSistema + " " + unidad);
     }
 
     public ManejoArchivo getArchivoSalida() {
@@ -39,27 +60,106 @@ public class Salida extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTextArea();
+        labelClientesLlegaron = new javax.swing.JLabel();
+        labelClientesSalieron = new javax.swing.JLabel();
+        labelLlegadasPromedio = new javax.swing.JLabel();
+        labelSalidasPromedio = new javax.swing.JLabel();
+        labelClientesSinEspera = new javax.swing.JLabel();
+        labelClientesSeVa = new javax.swing.JLabel();
+        labelClientePromedioEnCola = new javax.swing.JLabel();
+        labelClientePromedioSistema = new javax.swing.JLabel();
+        labelClienteEspera = new javax.swing.JLabel();
+        labelPorcentajeUtilizacion = new javax.swing.JLabel();
+        labelTiempoEntreLlegadasPromedio = new javax.swing.JLabel();
+        labelTiempoServicioPromedio = new javax.swing.JLabel();
+        labelTiempoAdicional = new javax.swing.JLabel();
+        labelTiempoColaPromedio = new javax.swing.JLabel();
+        labelTiempoSistemaPromedio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(232, 225, 225));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        titulo.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("SIMULADOR DE COLAS");
+        titulo.setText("Fin de simulacion");
         jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 42));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel1.setText("SALIDA DEL SISTEMA");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel1.setText("Estadisticas");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 11));
+
+        labelClientesLlegaron.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientesLlegaron.setText("Cantidad de clientes que llegaron: ");
+        jPanel1.add(labelClientesLlegaron, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 11));
+
+        labelClientesSalieron.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientesSalieron.setText("Cantidad de clientes que salieron: ");
+        jPanel1.add(labelClientesSalieron, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 11));
+
+        labelLlegadasPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelLlegadasPromedio.setText("Llegadas promedio: ");
+        jPanel1.add(labelLlegadasPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, 11));
+
+        labelSalidasPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelSalidasPromedio.setText("Salidas promedio: ");
+        jPanel1.add(labelSalidasPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 11));
+
+        labelClientesSinEspera.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientesSinEspera.setText("Cantidad de clientes que no epseran: ");
+        jPanel1.add(labelClientesSinEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, 11));
+
+        labelClientesSeVa.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientesSeVa.setText("Cantidad de clientes que se van: ");
+        jPanel1.add(labelClientesSeVa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 11));
+
+        labelClientePromedioEnCola.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientePromedioEnCola.setText("Promedio de clientes en cola: ");
+        jPanel1.add(labelClientePromedioEnCola, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, 11));
+
+        labelClientePromedioSistema.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClientePromedioSistema.setText("Promedio de clientes en el sistema: ");
+        jPanel1.add(labelClientePromedioSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, 11));
+
+        labelClienteEspera.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelClienteEspera.setText("Probabilidad de un cliente de esperar: ");
+        jPanel1.add(labelClienteEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, 11));
+
+        labelPorcentajeUtilizacion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelPorcentajeUtilizacion.setText("Porcentaje de utilizacion del sistema: ");
+        jPanel1.add(labelPorcentajeUtilizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, 11));
+
+        labelTiempoEntreLlegadasPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTiempoEntreLlegadasPromedio.setText("Tiempo entre llegadas promedio: ");
+        jPanel1.add(labelTiempoEntreLlegadasPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, -1, 11));
+
+        labelTiempoServicioPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTiempoServicioPromedio.setText("Tiempo de servicio promedio: ");
+        jPanel1.add(labelTiempoServicioPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, 11));
+
+        labelTiempoAdicional.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTiempoAdicional.setText("Tiempo adicional que estuvo el sistema abierto: ");
+        jPanel1.add(labelTiempoAdicional, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, 11));
+
+        labelTiempoColaPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTiempoColaPromedio.setText("Tiempo adicional que estuvo el sistema abierto: ");
+        jPanel1.add(labelTiempoColaPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, 11));
+
+        labelTiempoSistemaPromedio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTiempoSistemaPromedio.setText("Tiempo promedio que el cliente estuvo en el sistema: ");
+        jPanel1.add(labelTiempoSistemaPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, 11));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel1.setText("Eventos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, 14));
 
         tabla.setColumns(20);
         tabla.setRows(5);
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 700, 470));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 700, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,9 +167,10 @@ public class Salida extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -80,6 +181,23 @@ public class Salida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelClientesLlegaron;
+    private javax.swing.JLabel labelClientesSalieron;
+    private javax.swing.JLabel labelLlegadasPromedio;
+    private javax.swing.JLabel labelSalidasPromedio;
+    private javax.swing.JLabel labelClientesSinEspera;
+    private javax.swing.JLabel labelClientesSeVa;
+    private javax.swing.JLabel labelClientePromedioEnCola;
+    private javax.swing.JLabel labelClientePromedioSistema;
+    private javax.swing.JLabel labelClienteEspera;
+    private javax.swing.JLabel labelPorcentajeUtilizacion;
+    private javax.swing.JLabel labelTiempoEntreLlegadasPromedio;
+    private javax.swing.JLabel labelTiempoAdicional;
+    private javax.swing.JLabel labelTiempoColaPromedio;
+    private javax.swing.JLabel labelTiempoSistemaPromedio;
+    private javax.swing.JLabel labelTiempoServicioPromedio;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea tabla;
     private javax.swing.JLabel titulo;
