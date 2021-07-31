@@ -239,7 +239,7 @@ public class Funciones {
                 "\n   Cantidad de clientes promedio en cola = " + clientesEnCola + " clientes."+ 
                 "\n   Cantidad de clientes promedio en el sistema = " + clientesEnSistema + " clientes."+
                 "\n   Probabilidad de un cliente de esperar = " + numberFormat.format(100 - probabilidadDeEsperar*100) + "%." +
-                "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(porcentajeUtilizacionGeneral*100) + "%." +
+                "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(100 - porcentajeUtilizacionGeneral*100) + "%." +
 
                 "\n\n   Tiempo entre LLegadas Promedio = " + tiempoEntreLLegadasPromedio + " por " + unidad +
                 "\n   Tiempo de Servicio Promedio = " + tiempoDeServicioPromedio +  " " + unidad + "." +
