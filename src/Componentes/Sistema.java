@@ -8,28 +8,19 @@ public class Sistema {
     private int timeModeling;
     private int prevTimeModeling;
     
-   //----------Actual------------------ 
     private StatusServers statusServer;
     private TablaWaiting waitingLength;
     private TablaArrivals tablaArrival;
     private TablaArrivals tablaSistema;
   
-  //----------Equivalente---------------
     private TablaVariables variables;
     private ArrayList<Integer> Lista_espera;
     
-  //------------------------------------  
-    
     private int arrivalTime;
     
-  //------------ACTUAL---------------------.  
-    private TablaDepartures departureTime;
-    private TablaArrivals salidasSistema;
-    
-  //-----------EQUIVALENTE------------------
     private TablaClientes clientes;
     private TablaEventos eventos;
-  //---------------------------------------  
+
     private int finishTime;
     private int numEvent;
     private int numClientEntrada;
@@ -43,9 +34,8 @@ public class Sistema {
     private TablaDistribuciones tablaLLegadas;
     private TablaDistribuciones tablaServicio;
     
-     private Funciones F;
-     private Funciones Estadisticas; 
-    //-----------------------------
+    private Funciones F;
+
     private TablaSimulacion simulacion; 
     private Salida S;
 
@@ -59,7 +49,6 @@ public class Sistema {
      * @param costoServidor Indica el costo de un nuevo servidor
      * @param tablaLlegadas Representa los valores de tiempo entre llegadas y sus probabilidades
      * @param tablaServicio Representa los valores de tiempos de servicio y sus probabilidades
-     * @param salida Representa la salida del sistemma
      */
       
      public Sistema(TablaArrivals tablaArrival, int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
@@ -75,7 +64,6 @@ public class Sistema {
        this.Lista_espera=new ArrayList<Integer>();
        this.arrivalTime=0;
        this.clientes=new TablaClientes();
-       this.salidasSistema = new TablaArrivals();
        this.tablaSistema = new TablaArrivals();
        this.tablaArrival = tablaArrival;
        this.finishTime = finishTime;
@@ -90,7 +78,6 @@ public class Sistema {
        this.tablaLLegadas=tablaLlegadas;
        this.tablaServicio=tablaServicio;
        this.F = new Funciones(numServers);
-       this.Estadisticas = new Funciones(numServers);
        this.S = salida;
        this.simulacion=new TablaSimulacion();
      }
@@ -253,8 +240,8 @@ public class Sistema {
      this.F.CalcularPromedios(this.timeModeling);
      this.F.calcularTiempoAdicional(timeModeling, finishTime);
      this.F.relacionOptima(costoEsperaClient, costoDeServidor);
-     //this.F.calcularEstadisticasPromedio(finishTime);
 
+     S.setLabelsText(this.F, unidad);
      S.addInfo(this.F.toString(unidad));
      S.getArchivoSalida().escribirArchivo(this.F.toString(unidad));
   }; 
@@ -270,21 +257,6 @@ public class Sistema {
             cliente=this.numClientEntrada;
         else
             cliente=this.numClientSalida;
-    }
-    /**
-     * Imprime las estadisticas obtenidas de la simulacion 
-     * @param unidad Unidad utilizada en la simulacion
-     */
-    public void imprimirEstadisticas(String unidad){
-        S.addInfo(this.F.toString(unidad));
-    }
-    
-    
-
-    //----------------------------------------------------- Tipo Evento
-
-    public TablaArrivals getSalidasSistema() {
-        return salidasSistema;
     }
 
     /**
@@ -388,8 +360,4 @@ public class Sistema {
         this.numClientSistem = this.numClientSistem-1;
     }
 
-    public Funciones getEstadisticas() {
-        return Estadisticas;
-    }
-    
 }

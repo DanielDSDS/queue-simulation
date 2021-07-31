@@ -1,20 +1,19 @@
 
    Estadisticas :
-   Cantidad de Llegadas = 500 llegadas
-   Llegadas Promedio = 0.51 llegadas por Segundos
-   Tiempo entre LLegadas Promedio = 1.974 por Segundos
-   Cantidad de Salidas = 500 salidas.
-   Salidas Promedio = 0.14 salidas. por Segundos
-   Tiempo de Servicio Promedio = 7.394 Segundos.
+   Cantidad de Llegadas = 20 llegadas
+   Cantidad de Salidas = 20 salidas.
+   Llegadas Promedio = 0.42 llegadas por Segundos
+   Salidas Promedio = 0.15 salidas. por Segundos
 
-   Cantidad de veces que un clientes no espero = 500.0 veces.
-   Cantidad de veces que un cliente se fue = 500.0 veces.
-   Probabilidad de un cliente de esperar = 0.0%.
+   Cantidad de veces que un clientes no espero = 20.0 veces.
+   Cantidad de veces que un cliente se fue = 20.0 veces.
    Cantidad de clientes promedio en cola = 0.0 clientes.
-   Cantidad de clientes promedio en el sistema = -0.7014428412874584 clientes.
-   Tiempo promedio de un cliente en cola = 447.056 Segundos.
-   Tiempo promedio de un cliente en sistema = 454.45 Segundos.
-   Porcentaje de utilizacion del sistema = -2.20%.
-   Relacion optima entre Costo de Espera del cliente y Costo de nuevo servidor:
-         Recomendable agregar 0.0 servidores.
+   Cantidad de clientes promedio en el sistema = -0.2857142857142857 clientes.
+   Probabilidad de un cliente de esperar = 0.00%.
+   Porcentaje de utilizacion del sistema = 4.76%.
 
+   Tiempo entre LLegadas Promedio = 2.4 por Segundos
+   Tiempo de Servicio Promedio = 6.65 Segundos.
+   Tiempo adicional que el sistema estuvo abierto = -51.0 Segundos.
+   Tiempo promedio de un cliente en cola = 17.9 Segundos.
+   Tiempo promedio de un cliente en sistema = 24.55 Segundos.

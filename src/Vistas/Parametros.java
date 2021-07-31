@@ -403,46 +403,14 @@ public class Parametros extends javax.swing.JFrame {
 
         if(this.seleccion==0)
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasM,
-                                        this.tablaServidoresM,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasM,
-                                        this.tablaServidoresA,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresA,this.salida);
             else
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasA,
-                                        this.tablaServidoresM,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,
-                                        Integer.parseInt(this.maxServidores.getText()),
-                                        Integer.parseInt(this.duracion.getText()), 
-                                        Integer.parseInt(this.maxClientes.getText()),
-                                        this.getValorCostoCliente(),
-                                        this.getValorCostoServidor(),
-                                        this.tablaLlegadasA,
-                                        this.tablaServidoresA,
-                                        this.salida);
+                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresA,this.salida);
             Simulacion.comenzarSimulacion(this.getUnidad());
             this.setVisible(false);
             salida.setVisible(true);

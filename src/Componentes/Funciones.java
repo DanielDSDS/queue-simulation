@@ -11,37 +11,27 @@ import java.text.DecimalFormat;
 /**
  * Clase que contiene todas las funciones para la obtencion de datos en la simulacion 
  * usando los parametros de entrada
- * @author Daniel Bermudez
  */
 public class Funciones {
-    //Nose si vamos a requerir esto pero ahi lo marco
-    private double llegadasPromedio;
-    private double tiempoEntreLLegadas;
-    private double tiempoEntreLLegadasPromedio;
-    private int cantidadLlegadas;
-    
-    private double salidasPromedio;
-    private double tiempoDeServicio;
-    private double tiempoDeServicioPromedio;
-    private int cantidadServicio;
-    //---------------------------------------------
-    
-
-    
-    private double clientesNoEsperan;
-   
-    private double clientesSeVan;
-    
-    private double probabilidadDeEsperar;
-    
-    private double clientesEnCola;
-    private double clientesEnSistema;
-    private double tiempoEnCola;
-    private double tiempoEnSistema;
-    private double tiempoAdicional;
-    private ArrayList<Double> porcentajeUtilizacion;
-    private double porcentajeUtilizacionGeneral;
-    private double relacionOptima;
+    public double llegadasPromedio;
+    public double tiempoEntreLLegadas;
+    public double tiempoEntreLLegadasPromedio;
+    public int cantidadLlegadas;
+    public double salidasPromedio;
+    public double tiempoDeServicio;
+    public double tiempoDeServicioPromedio;
+    public int cantidadServicio;
+    public double clientesNoEsperan;
+    public double clientesSeVan;
+    public double probabilidadDeEsperar;
+    public double clientesEnCola;
+    public double clientesEnSistema;
+    public double tiempoEnCola;
+    public double tiempoEnSistema;
+    public double tiempoAdicional;
+    public ArrayList<Double> porcentajeUtilizacion;
+    public double porcentajeUtilizacionGeneral;
+    public double relacionOptima;
  
     
      public Funciones(int numServers) {
@@ -90,11 +80,7 @@ public class Funciones {
         this.calcularTiempoPromedioClienteEnCola();
         this.calcularPorcentajeUtilizacion(timeModeling);
         this.calcularPorcentajeUtilizacionGeneral();
-        System.out.println("////////////////Clientes no esperan " + this.clientesNoEsperan);
-        System.out.println("////////////////Clientes se van " + this.clientesSeVan);
-        System.out.println("////////////////Cant llegadas " + this.cantidadLlegadas);
         System.out.println("////////////////Tiempo entre llegadas " + this.tiempoEntreLLegadas);
-        System.out.println("////////////////Clientes cola " + this.clientesEnCola);
         System.out.println("////////////////Clientes sistema " + this.clientesEnSistema);
         System.out.println("////////////////Tiempo en sistema " + this.tiempoEnSistema);
         System.out.println("////////////////Tiempo en cola " + this.tiempoEnCola);
@@ -277,25 +263,22 @@ public class Funciones {
         return  "\n   Estadisticas :" +
                 
                 "\n   Cantidad de Llegadas = " + cantidadLlegadas + " llegadas" +
-                "\n   Llegadas Promedio = " + numberFormat.format(llegadasPromedio) + " llegadas" + " por " + unidad +
-                "\n   Tiempo entre LLegadas Promedio = " + tiempoEntreLLegadasPromedio + " por " + unidad +
-                
                 "\n   Cantidad de Salidas = " + cantidadServicio + " salidas." +
+
+                "\n   Llegadas Promedio = " + numberFormat.format(llegadasPromedio) + " llegadas" + " por " + unidad +
                 "\n   Salidas Promedio = " + numberFormat.format(salidasPromedio) +  " salidas." + " por " + unidad +
-                "\n   Tiempo de Servicio Promedio = " + tiempoDeServicioPromedio +  " " + unidad + "." +
-                
+
                 "\n\n   Cantidad de veces que un clientes no espero = " + clientesNoEsperan + " veces."+
                 "\n   Cantidad de veces que un cliente se fue = " + clientesSeVan + " veces."+
-                
-                "\n   Probabilidad de un cliente de esperar = " + (100 - probabilidadDeEsperar*100) + "%." +
                 "\n   Cantidad de clientes promedio en cola = " + clientesEnCola + " clientes."+ 
                 "\n   Cantidad de clientes promedio en el sistema = " + clientesEnSistema + " clientes."+
-                
-                "\n   Tiempo promedio de un cliente en cola = " + tiempoEnCola + " " + unidad + "." +
-                "\n   Tiempo promedio de un cliente en sistema = " + tiempoEnSistema + " " + unidad + "." +
-                //"\n   Porcentaje de utilizacion de los servidores = " + porcentajeUtilizacionUnitario + 
+                "\n   Probabilidad de un cliente de esperar = " + numberFormat.format(100 - probabilidadDeEsperar*100) + "%." +
                 "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(porcentajeUtilizacionGeneral*100) + "%." +
-                "\n   Relacion optima entre Costo de Espera del cliente y Costo de nuevo servidor:" +
-                "\n         Recomendable agregar " + relacionOptima+" servidores.\n\n";
+
+                "\n\n   Tiempo entre LLegadas Promedio = " + tiempoEntreLLegadasPromedio + " por " + unidad +
+                "\n   Tiempo de Servicio Promedio = " + tiempoDeServicioPromedio +  " " + unidad + "." +
+                "\n   Tiempo adicional que el sistema estuvo abierto = " + tiempoAdicional + " " + unidad + "." +
+                "\n   Tiempo promedio de un cliente en cola = " + tiempoEnCola + " " + unidad + "." +
+                "\n   Tiempo promedio de un cliente en sistema = " + tiempoEnSistema + " " + unidad + "."; 
     }
 }
