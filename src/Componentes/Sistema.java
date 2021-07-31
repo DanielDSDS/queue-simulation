@@ -43,10 +43,8 @@ public class Sistema {
     private TablaDistribuciones tablaLLegadas;
     private TablaDistribuciones tablaServicio;
     
-    //----------Actual------------
-     private Estadisticas E;
-    //----------Equivalente--------
      private Funciones F;
+     private Funciones Estadisticas; 
     //-----------------------------
     private TablaSimulacion simulacion; 
     private Salida S;
@@ -77,8 +75,6 @@ public class Sistema {
        this.Lista_espera=new ArrayList<Integer>();
        this.arrivalTime=0;
        this.clientes=new TablaClientes();
-
-       
        this.salidasSistema = new TablaArrivals();
        this.tablaSistema = new TablaArrivals();
        this.tablaArrival = tablaArrival;
@@ -93,7 +89,8 @@ public class Sistema {
        this.tipoEvent="Condiciones Iniciales";
        this.tablaLLegadas=tablaLlegadas;
        this.tablaServicio=tablaServicio;
-       this.F=new Funciones(numServers);
+       this.F = new Funciones(numServers);
+       this.Estadisticas = new Funciones(numServers);
        this.S = salida;
        this.simulacion=new TablaSimulacion();
      }
@@ -124,7 +121,7 @@ public class Sistema {
     };  
       
       
-    public void comenzarSimulacion(){
+    public void comenzarSimulacion(String unidad){
       this.generarTablaCliente();
       int indexCliente=0;
       Clientes actualCliente,nextCliente;
@@ -167,10 +164,6 @@ public class Sistema {
           int indexServer=this.variables.getVariables().getAvaibleServer();
           if(indexServer==-1){
             //----------------- Todos los servidores estan ocupados - Se coloca en cola ------------------------ 
-            //---------------------------------------- BUG 1
-            //En esta condicion esta uno de los bugs 
-            //Al entrar en esta condicion TM nunca incrementa y solo llegan clientes
-            //Se repite el mismo index del cliente
             System.out.println("Cliente Nro "+actualCliente.getNro()+" Entro en espera");
             this.Lista_espera.add(actualCliente.getNro());
             this.addClient();
@@ -178,12 +171,14 @@ public class Sistema {
             this.variables.getVariables().upWL();
             if(indexCliente<this.clientes.getTabla().size()-1){ 
               System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL()+")");  
-              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente).getTELL()+this.timeModeling);
              }
              else System.out.println("Ultimo cliente ingresado");
           } else {
             //----------------- Hay servidores disponibles - Se atiende el cliente ------------------------ 
             this.addClient();
+            this.F.actualizarClientesNoEsperan();
+            this.F.tiempoDeServicio(actualCliente.getTS());
             this.variables.getVariables().upCantClientes();
             this.variables.getVariables().setStatusServidor(indexServer,false);
             actualCliente.setNroS(indexServer);
@@ -192,20 +187,19 @@ public class Sistema {
             this.eventos.getEvento().updateDT(indexServer,actualCliente.getTS()+this.timeModeling);
             //Si es el primer evento AT es el TELL directamente
             if(this.numEvent==0){
-              System.out.println("Se actualiza AT con TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL());  
-              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL());
+              System.out.println("Se actualiza AT con TELL("+this.clientes.getTabla().get(indexCliente).getTELL());  
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente).getTELL());
             } else {
               //Si no es el primer evento se suma el TELL con TM  
               //Suma de TM con TELL 
              if(indexCliente<this.clientes.getTabla().size()-1){ 
-              System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente+1).getTELL()+")");  
-              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente+1).getTELL()+this.timeModeling);
+              System.out.println("Se actualiza AT con la suma de TM("+this.timeModeling+") y TELL("+this.clientes.getTabla().get(indexCliente).getTELL()+")");  
+              this.eventos.getEvento().setAT(this.clientes.getTabla().get(indexCliente).getTELL()+this.timeModeling);
              }
              else System.out.println("Ultimo cliente ingresado");
             }
-     
-          
           }
+          this.F.tiempoEntreLlegadas(this.clientes.getTabla().get(indexCliente).getTELL());
           indexCliente=indexCliente+1;
           System.out.println("Se actualiza TM con la AT("+this.eventos.getEvento().getAT()+")");  
           this.setTimeModeling(this.eventos.getEvento().getAT());
@@ -216,15 +210,9 @@ public class Sistema {
           int indexS=this.eventos.getEvento().nextExit();
           System.out.println("////////////////Salida por el server: " + indexS);
           System.out.println("///////////////TM: " + this.timeModeling);
-          //----------------------------------------- BUG 2
-          //Cuando se llega a la cantidad de clientes maxima
-          // entra en esta condicion y no se condigue un indice de cliente que coincida con indexS
-          //por lo que indexCliente queda como -1, rompiendo el sistema
-          int indexClienteSalida=this.clientes.searchClientInServer(indexS);
-          //indexClient es -1 en ciertas instancias, no se le ha asignado un servidor a ningun cliente
+          int indexClienteSalida = this.clientes.searchClientInServer(indexS);
           actualCliente=this.clientes.getFromList(indexClienteSalida);
           System.out.println("///////////////Cliente: " + indexClienteSalida + " " + actualCliente );
-          //Por que esta el -2 hardcodeado? R:el -2 representa que el cliente ya a sido despachado del sistema 
           actualCliente.setNroS(-2);
           this.simulacion.Add(this.numEvent,"Salida",indexClienteSalida);
           this.prevTimeModeling=this.timeModeling;
@@ -234,6 +222,7 @@ public class Sistema {
           this.variables.getVariables().setTM(this.timeModeling);
           this.F.actualizarCantidadClientesEnSistema(this.prevTimeModeling,this.timeModeling,this.numClientSistem);
           this.F.actualizarCantidadClientesEnCola(this.prevTimeModeling, this.timeModeling, this.Lista_espera.size());
+          this.F.actualizarClientesSeVan();
           this.subClientSistem();
           this.variables.getVariables().susCantClientes();
           this.F.actualizarTiempoClienteEnSistema(actualCliente.getTELL(),this.eventos.getEvento().nextSalida(),indexClienteSalida);
@@ -264,6 +253,10 @@ public class Sistema {
      this.F.CalcularPromedios(this.timeModeling);
      this.F.calcularTiempoAdicional(timeModeling, finishTime);
      this.F.relacionOptima(costoEsperaClient, costoDeServidor);
+     //this.F.calcularEstadisticasPromedio(finishTime);
+
+     S.addInfo(this.F.toString(unidad));
+     S.getArchivoSalida().escribirArchivo(this.F.toString(unidad));
   }; 
   
 
@@ -283,7 +276,7 @@ public class Sistema {
      * @param unidad Unidad utilizada en la simulacion
      */
     public void imprimirEstadisticas(String unidad){
-        S.addInfo(this.E.toString(1,unidad));
+        S.addInfo(this.F.toString(unidad));
     }
     
     
@@ -395,8 +388,8 @@ public class Sistema {
         this.numClientSistem = this.numClientSistem-1;
     }
 
-    public Estadisticas getEstadisticas() {
-        return E;
+    public Funciones getEstadisticas() {
+        return Estadisticas;
     }
     
 }

@@ -30,9 +30,7 @@ public class Parametros extends javax.swing.JFrame {
     private int valorCostoCliente;
     private int valorCostoServidor;
     private int seleccion;
-    /**
-     * Creates new form Prueba
-     */
+    
     public Parametros() {
         initComponents();
     }
@@ -445,22 +443,10 @@ public class Parametros extends javax.swing.JFrame {
                                         this.tablaLlegadasA,
                                         this.tablaServidoresA,
                                         this.salida);
-            Simulacion.comenzarSimulacion();
+            Simulacion.comenzarSimulacion(this.getUnidad());
             this.setVisible(false);
             salida.setVisible(true);
     }//GEN-LAST:event_siguienteActionPerformed
-
-    public int determinarNumeroCiclos(){
-        if(this.getUnidadTiempo().equals("DIAS"))
-            return this.DIA*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("SEMANAS"))
-            return this.SEMANA*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("MESES"))
-            return this.MES*this.getValorDuracion();
-        if(this.getUnidadTiempo().equals("AÑOS"))
-            return this.YEAR*this.getValorDuracion();
-        return 1;  
-    }
 
     public int getValorDuracion() {
         return valorDuracion;
