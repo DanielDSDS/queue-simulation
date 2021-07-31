@@ -1,7 +1,7 @@
 
 package proyecto;
 
-import Vistas.Parametros;
+import Vistas.Entrada;
 
 import Componentes.TablaClientes;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class Proyecto {
      */
       public static void main(String[] args) {
         
-        Parametros P = new Parametros();
+        Entrada P = new Entrada();
         P.setVisible(true);
 
       /* 

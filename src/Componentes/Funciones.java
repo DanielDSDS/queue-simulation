@@ -141,7 +141,7 @@ public class Funciones {
         if(actual==0)
             this.clientesEnCola=0;
         else{
-            this.clientesEnCola=this.clientesEnCola+(actual-prev)*(waitingLength);
+            this.clientesEnCola=this.clientesEnCola+Math.abs(actual-prev)*(waitingLength);
         }
     }
     
@@ -153,7 +153,7 @@ public class Funciones {
         if(actual==0)
             this.clientesEnSistema=0;
         else{
-            this.clientesEnSistema= this.clientesEnSistema+(actual-prev)*(numClientSistem);
+            this.clientesEnSistema= this.clientesEnSistema+Math.abs(actual-prev)*(numClientSistem);
         }
     }
     

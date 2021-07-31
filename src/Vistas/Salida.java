@@ -85,7 +85,7 @@ public class Salida extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Fin de simulacion");
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 42));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 790, 42));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setText("Estadisticas");
@@ -153,7 +153,7 @@ public class Salida extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setText("Eventos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, 14));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 390, -1, 14));
 
         tabla.setColumns(20);
         tabla.setRows(5);

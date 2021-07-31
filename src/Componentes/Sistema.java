@@ -83,7 +83,7 @@ public class Sistema {
      }
     
       /**
-     * Inicia la simulacion, con los parametros ya suministrados, entre ellos el tiempo de simulacion, 
+     * Inicia la simulacion, con los Entrada ya suministrados, entre ellos el tiempo de simulacion, 
      * tiempos entre llegadas, de servicio y a partir de ellos obtiene las estadisticas
      */
     
