@@ -279,7 +279,7 @@ public class Parametros extends javax.swing.JFrame {
       
         simular.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         simular.setText("Simular");
-        jPanel1.add(simular, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 620, 120, 30));
+        jPanel1.add(simular, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 800, 120, 30));
         simular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simularActionPerformed(evt);

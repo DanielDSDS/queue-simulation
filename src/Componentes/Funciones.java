@@ -8,10 +8,6 @@ package Componentes;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
-/**
- * Clase que contiene todas las funciones para la obtencion de datos en la simulacion 
- * usando los parametros de entrada
- */
 public class Funciones {
     public double llegadasPromedio;
     public double tiempoEntreLLegadas;
@@ -80,10 +76,6 @@ public class Funciones {
         this.calcularTiempoPromedioClienteEnCola();
         this.calcularPorcentajeUtilizacion(timeModeling);
         this.calcularPorcentajeUtilizacionGeneral();
-        System.out.println("////////////////Tiempo entre llegadas " + this.tiempoEntreLLegadas);
-        System.out.println("////////////////Clientes sistema " + this.clientesEnSistema);
-        System.out.println("////////////////Tiempo en sistema " + this.tiempoEnSistema);
-        System.out.println("////////////////Tiempo en cola " + this.tiempoEnCola);
     };
     
     public void setValoresEntrada(TablaDistribuciones tabla){
@@ -137,18 +129,10 @@ public class Funciones {
         this.clientesNoEsperan=this.clientesNoEsperan+1;
     }
     
-    /**
-     * Cantidad de clientes que se van del sistema en caso de que este en su 
-     * capacidad maxima a la hora de llegada
-     */
     public void actualizarClientesSeVan(){
         this.clientesSeVan=this.clientesSeVan+1;
     }
     
-    /**
-     * Actualiza la probabilidad de esperar de los clientes cuando llegan 
-     * a la etapa
-     */
     public void calcularProbabilidadEsperar(){
         this.probabilidadDeEsperar = Math.abs((this.cantidadLlegadas-this.clientesNoEsperan-this.clientesSeVan)/this.cantidadLlegadas);
     }
@@ -213,22 +197,13 @@ public class Funciones {
         }
     }
     
-     /**
-     * Actualiza el procentaje de utilizacion en general del sistema 
-     */
     public void calcularPorcentajeUtilizacionGeneral(){
         double valorSumado=0;
         for(int i=0;i<this.porcentajeUtilizacion.size();i++)
             valorSumado = valorSumado + this.porcentajeUtilizacion.get(i);
         this.porcentajeUtilizacionGeneral = valorSumado/this.porcentajeUtilizacion.size();
     }
-    
-    /**
-     * Actualiza los porcentajes de utilizacion de cada uno de los servidores
-     * @param prevTimeModeling
-     * @param timeModeling
-     * @param statusServer
-     */
+
     public void actualizarPorcentajes(int prevTimeModeling, int timeModeling,ArrayList<Boolean> statusServer){
         for(int i=0;i<statusServer.size();i++){
             int uso;
@@ -238,19 +213,6 @@ public class Funciones {
                 uso=0;
             this.actualizarPorcentajeUtilizacion(prevTimeModeling,timeModeling,i,uso);
         }
-    }
-
-    public String toStringGeneral(String unidad){
-        return  " ESTADISTICAS GENERALES:" +                
-                "\n   Cantidad de veces que un clientes no espero = " + clientesNoEsperan + " veces." +
-                "\n   Cantidad de veces que un cliente se fue = " + clientesSeVan + " veces." +
-                "\n   Probabilidad de un cliente de esperar = " + probabilidadDeEsperar*100 + "%."+
-                "\n   Cantidad de clientes promedio en cola = " + clientesEnCola + " clientes."+
-                "\n   Cantidad de clientes promedio en el sistema = " + clientesEnSistema + " clientes." +
-                "\n   Tiempo promedio de un cliente en cola = " + tiempoEnCola + " "+ unidad + "." +
-                "\n   Tiempo promedio de un cliente en sistema = " + tiempoEnSistema + " " + unidad + "." + 
-                "\n   Tiempo adicional que el sistema estuvo abierto = " + tiempoAdicional + " " + unidad + "." +
-                "\n   Porcentaje de utilizacion del sistema = " + porcentajeUtilizacionGeneral*100 + "%.\n"; 
     }
 
     public String toString(String unidad) {

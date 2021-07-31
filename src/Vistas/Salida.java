@@ -37,7 +37,7 @@ public class Salida extends javax.swing.JFrame {
       this.labelTiempoServicioPromedio.setText("Tiempo de servicio promedio : " + est.tiempoDeServicioPromedio + " " + unidad);
       this.labelTiempoAdicional.setText("Tiempo adicional que el sistema estuvo abierto : " + est.tiempoAdicional + " " + unidad);
       this.labelTiempoColaPromedio.setText("Tiempo promedio de un cliente en cola : " + est.tiempoEnCola + " " + unidad);
-      this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + est.tiempoEnSistema);
+      this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + est.tiempoEnSistema + " " + unidad);
     }
 
     public ManejoArchivo getArchivoSalida() {
@@ -151,11 +151,15 @@ public class Salida extends javax.swing.JFrame {
         labelTiempoSistemaPromedio.setText("Tiempo promedio que el cliente estuvo en el sistema: ");
         jPanel1.add(labelTiempoSistemaPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, 11));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel1.setText("Eventos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, 14));
+
         tabla.setColumns(20);
         tabla.setRows(5);
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 700, 370));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 700, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +170,7 @@ public class Salida extends javax.swing.JFrame {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
