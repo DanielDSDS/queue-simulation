@@ -219,7 +219,7 @@ public class Funciones {
         }
     }
 
-    public String toString(String unidad) {
+    public String generarSalida(String unidad) {
         DecimalFormat numberFormat = new DecimalFormat("0.00");
         String porcentajeUtilizacionUnitario = "";
         for (int i=0;i<this.porcentajeUtilizacion.size();i++) {
