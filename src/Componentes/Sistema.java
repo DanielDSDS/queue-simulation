@@ -242,7 +242,7 @@ public class Sistema {
      this.F.relacionOptima(costoEsperaClient, costoDeServidor);
 
      S.setLabelsText(this.F, unidad);
-     S.addInfo(this.F.toString(unidad));
+     //S.addInfo(this.F.toString(unidad));
      S.getArchivoSalida().escribirArchivo(this.F.toString(unidad));
   }; 
   
