@@ -27,7 +27,6 @@ public class Evento {
     }
     
     public void setAT(int at){
-      System.out.println("--AT actualizado: "+at);
       this.AT=at;
     }
     
@@ -74,7 +73,6 @@ public class Evento {
     }
     public void updateDT(int i,int dt){
       this.lista_DT.set(i, dt);
-      System.out.println("--DT actualizado del servidor"+i+": " + this.lista_DT.get(i));  
     }
     
 }

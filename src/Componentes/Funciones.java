@@ -177,7 +177,11 @@ public class Funciones {
     }
     
     public void calcularTiempoAdicional(int timeModeling, int finishTime){
+      if(timeModeling-finishTime > 0){
         this.tiempoAdicional = timeModeling-finishTime;
+      } else {
+        this.tiempoAdicional = 0;
+      }
     }
     
      public void relacionOptima(int costoEsperaCliente, int costoServidor){

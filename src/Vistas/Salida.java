@@ -29,15 +29,15 @@ public class Salida extends javax.swing.JFrame {
       this.labelSalidasPromedio.setText("Promedio de llegadas: " + numberFormat.format(est.salidasPromedio) + " por " + unidad);  
       this.labelClientesSinEspera.setText("Cantidad de veces que clientes no esperaron: " + est.clientesNoEsperan);  
       this.labelClientesSeVa.setText("Cantidad de veces que cliente se va: " + est.clientesSeVan);  
-      this.labelClientePromedioEnCola.setText("Promedio de clientes en cola : " + est.clientesEnCola);
-      this.labelClientePromedioSistema.setText("Promedio de clientes en el sistema : " + est.clientesEnSistema);
+      this.labelClientePromedioEnCola.setText("Promedio de clientes en cola : " + numberFormat.format(est.clientesEnCola));
+      this.labelClientePromedioSistema.setText("Promedio de clientes en el sistema : " + numberFormat.format(est.clientesEnSistema));
       this.labelPorcentajeUtilizacion.setText("Porcentaje de utilizacion del sistema : " + numberFormat.format(est.porcentajeUtilizacionGeneral*100) + "%");
       this.labelClienteEspera.setText("Probabilidad de un cliente de esperar : " + numberFormat.format(100 - est.probabilidadDeEsperar*100) + "%");
-      this.labelTiempoEntreLlegadasPromedio.setText("Tiempo entre llegada promedio : " + est.tiempoEntreLLegadasPromedio + " " + unidad);
-      this.labelTiempoServicioPromedio.setText("Tiempo de servicio promedio : " + est.tiempoDeServicioPromedio + " " + unidad);
+      this.labelTiempoEntreLlegadasPromedio.setText("Tiempo entre llegada promedio : " + numberFormat.format(est.tiempoEntreLLegadasPromedio) + " " + unidad);
+      this.labelTiempoServicioPromedio.setText("Tiempo de servicio promedio : " + numberFormat.format(est.tiempoDeServicioPromedio) + " " + unidad);
       this.labelTiempoAdicional.setText("Tiempo adicional que el sistema estuvo abierto : " + est.tiempoAdicional + " " + unidad);
-      this.labelTiempoColaPromedio.setText("Tiempo promedio de un cliente en cola : " + est.tiempoEnCola + " " + unidad);
-      this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + est.tiempoEnSistema + " " + unidad);
+      this.labelTiempoColaPromedio.setText("Tiempo promedio de un cliente en cola : " + numberFormat.format(est.tiempoEnCola) + " " + unidad);
+      this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + numberFormat.format(est.tiempoEnSistema) + " " + unidad);
     }
 
     public ManejoArchivo getArchivoSalida() {
