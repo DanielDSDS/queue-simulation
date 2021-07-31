@@ -58,7 +58,7 @@ public class Distribuciones {
     
     @Override
     public String toString() {
-        return "Valor=" + this.tiempo + ", Porcentaje=" + this.probabilidad + ", Porcentaje acumulado=" + this.probalidadAcumulada + ", Intervalo= [" + this.valorMin + "," + this.getvalorMax() + "]";
+        return "Valor = " + this.tiempo + ", Porcentaje = " + this.probabilidad + ", Porcentaje acumulado = " + this.probalidadAcumulada + ", Intervalo = (" + this.valorMin + "," + this.getvalorMax() + ")";
     }
 
 }
