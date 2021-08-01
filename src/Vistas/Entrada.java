@@ -8,7 +8,6 @@ package Vistas;
 import Componentes.ManejoArchivo;
 import Componentes.TablaDistribuciones;
 import Componentes.Sistema;
-import Componentes.TablaArrivals;
 import Funciones.Alerta;
 import Funciones.Numerico;
 import javax.swing.JTextField;
@@ -399,18 +398,17 @@ public class Entrada extends javax.swing.JFrame {
         this.valorCostoServidor = Integer.parseInt(this.costoServidor.getText());
 
         Sistema Simulacion;
-        TablaArrivals tabla = new TablaArrivals();        
 
         if(this.seleccion==0)
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresM,this.salida);
+                    Simulacion = new Sistema(Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresA,this.salida);
+                    Simulacion = new Sistema(Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasM,this.tablaServidoresA,this.salida);
             else
                 if(manualServicios.isSelected())
-                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresM,this.salida);
+                    Simulacion = new Sistema(Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresM,this.salida);
                 else
-                    Simulacion = new Sistema(tabla,Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresA,this.salida);
+                    Simulacion = new Sistema(Integer.parseInt(this.maxServidores.getText()),Integer.parseInt(this.duracion.getText()), Integer.parseInt(this.maxClientes.getText()),this.getValorCostoCliente(),this.getValorCostoServidor(),this.tablaLlegadasA,this.tablaServidoresA,this.salida);
             Simulacion.comenzarSimulacion(this.getUnidad());
             this.setVisible(false);
             salida.setVisible(true);

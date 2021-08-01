@@ -9,8 +9,6 @@ public class Sistema {
     private int prevTimeModeling;
     
     private StatusServers statusServer;
-    private TablaArrivals tablaArrival;
-    private TablaArrivals tablaSistema;
   
     private TablaVariables variables;
     private ArrayList<Integer> Lista_espera;
@@ -39,8 +37,6 @@ public class Sistema {
     private Salida S;
 
     /**
-     * @param tablaArrival Indica las entradas previstas para la etapa
-     * @param numEtapa Indica a la etapa que representa en el sistema
      * @param numServers Indica el numero de servidores que tendra la etapa
      * @param finishTime Indica el Tiempo de Modelado maximo
      * @param numClientMax Indica el valor de los clientes maximos en el sistema
@@ -50,7 +46,7 @@ public class Sistema {
      * @param tablaServicio Representa los valores de tiempos de servicio y sus probabilidades
      */
       
-     public Sistema(TablaArrivals tablaArrival, int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
+     public Sistema( int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
        this.timeModeling=0;
        this.prevTimeModeling=0;
        this.variables=new TablaVariables();
@@ -63,8 +59,6 @@ public class Sistema {
        this.Lista_espera=new ArrayList<Integer>();
        this.arrivalTime=0;
        this.clientes=new TablaClientes();
-       this.tablaSistema = new TablaArrivals();
-       this.tablaArrival = tablaArrival;
        this.finishTime = finishTime;
        this.numEvent=0;
        this.numClientEntrada=0;

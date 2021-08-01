@@ -113,7 +113,6 @@ public class ManejoArchivo {
                     if(bfRead.equals("Tiempos de Servicio")){
                         op = "Servicio";
                         valorArreglo++;
-                        //Ts.add(valorArreglo,new TablaServicio());
                     }
                     else
                         if(op.equals("Servicio") && !bfRead.equals("") && valor==valorArreglo)
