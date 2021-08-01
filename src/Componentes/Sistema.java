@@ -9,7 +9,6 @@ public class Sistema {
     private int prevTimeModeling;
     
     private StatusServers statusServer;
-    private TablaWaiting waitingLength;
     private TablaArrivals tablaArrival;
     private TablaArrivals tablaSistema;
   

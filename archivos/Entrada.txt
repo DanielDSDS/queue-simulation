@@ -1,13 +1,13 @@
 Tiempos entre Llegadas
-1 50
+1 30
 2 20
 3 20
-4 2 
-5 8 
+4 20 
+5 10 
 
 Tiempos de Servicio
-5 20
-7 30
-8 30
-9 10
+5 30
+7 20
+8 10
+9 30
 10 10

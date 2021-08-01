@@ -224,7 +224,7 @@ public class Funciones {
         String porcentajeUtilizacionUnitario = "";
         for (int i=0;i<this.porcentajeUtilizacion.size();i++) {
             porcentajeUtilizacionUnitario = porcentajeUtilizacionUnitario +"  Servidor "+ (i+1) + ": " +
-                    (100 - numberFormat.format(this.porcentajeUtilizacion.get(i)*100))+" %,";
+                    (numberFormat.format(100 - this.porcentajeUtilizacion.get(i)*100))+" %,";
         }
         return  "\n   Estadisticas :" +
                 
