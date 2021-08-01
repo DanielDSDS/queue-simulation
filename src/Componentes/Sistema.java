@@ -187,6 +187,8 @@ public class Sistema {
           indexCliente=indexCliente+1;
           //System.out.println("Se actualiza TM con la AT("+this.eventos.getEvento().getAT()+")");  
           this.setTimeModeling(this.eventos.getEvento().getAT());
+          S.addInfo("\n-> TELL: " + actualCliente.getTELL());
+          S.addInfo("\n-> TS: " + actualCliente.getTS());
           S.addInfo("\n-> TM actualizado: " + this.eventos.getEvento().getAT());
           S.addInfo("\n///////Fin llegada///////");
         } else {
@@ -202,13 +204,15 @@ public class Sistema {
           this.prevTimeModeling=this.timeModeling;
           //System.out.println("Se actualiza TM con la DT("+this.eventos.getEvento().nextSalida()+")");  
           this.setTimeModeling(this.eventos.getEvento().nextSalida());
-          S.addInfo("\n->TM actualizado: " + this.eventos.getEvento().nextSalida());
           this.variables.getVariables().setTM(this.timeModeling);
           this.F.actualizarCantidadClientesEnSistema(this.prevTimeModeling,this.timeModeling,this.numClientSistem);
           this.F.actualizarCantidadClientesEnCola(this.prevTimeModeling, this.timeModeling, this.Lista_espera.size());
           this.F.actualizarClientesSeVan();
           this.subClientSistem();
           this.variables.getVariables().susCantClientes();
+          S.addInfo("\n-> TELL: " + actualCliente.getTELL());
+          S.addInfo("\n-> TS: " + actualCliente.getTS());
+          S.addInfo("\n->TM actualizado: " + this.eventos.getEvento().nextSalida());
           this.F.actualizarTiempoClienteEnSistema(actualCliente.getTELL(),this.eventos.getEvento().nextSalida(),indexClienteSalida);
           this.F.actualizarTiempoClienteEnCola(actualCliente.getTELL(),this.eventos.getEvento().nextSalida(),actualCliente.getTS(),indexClienteSalida);
           this.F.actualizarPorcentajes(this.prevTimeModeling, this.timeModeling, this.variables.getVariables().getListaSS());
