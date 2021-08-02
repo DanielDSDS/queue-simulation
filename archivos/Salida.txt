@@ -1,19 +1,19 @@
 
    Estadisticas :
-   Cantidad de Llegadas = 50 llegadas
-   Cantidad de Salidas = 50 salidas.
-   Llegadas Promedio = 0.42 llegadas por Segundos
-   Salidas Promedio = 0.13 salidas. por Segundos
+   Cantidad de Llegadas = 3 llegadas
+   Cantidad de Salidas = 3 salidas.
+   Llegadas Promedio = 0.33 llegadas por Segundos
+   Salidas Promedio = 0.20 salidas. por Segundos
 
-   Cantidad de veces que un clientes no espero = 50.0 veces.
-   Cantidad de veces que un cliente se fue = 50.0 veces.
+   Cantidad de veces que un clientes no espero = 3.0 veces.
+   Cantidad de veces que un cliente se fue = 3.0 veces.
    Cantidad de clientes promedio en cola = 0.0 clientes.
-   Cantidad de clientes promedio en el sistema = 1.927927927927928 clientes.
+   Cantidad de clientes promedio en el sistema = 0.9 clientes.
    Probabilidad de un cliente de esperar = 0.00%.
-   Porcentaje de utilizacion del sistema = 98.36%.
+   Porcentaje de utilizacion del sistema = 96.67%.
 
-   Tiempo entre LLegadas Promedio = 2.36 por Segundos
-   Tiempo de Servicio Promedio = 7.46 Segundos.
-   Tiempo adicional que el sistema estuvo abierto = 11.0 Segundos.
-   Tiempo promedio de un cliente en cola = 53.56 Segundos.
-   Tiempo promedio de un cliente en sistema = 61.02 Segundos.  Servidor 1: 90.09 %,  Servidor 2: 95.50 %,  Servidor 3: 100.00 %,  Servidor 4: 92.79 %,  Servidor 5: 92.79 %,  Servidor 6: 100.00 %,  Servidor 7: 102.70 %,  Servidor 8: 102.70 %,  Servidor 9: 102.70 %,  Servidor 10: 102.70 %,  Servidor 11: 100.00 %,
+   Tiempo entre LLegadas Promedio = 3.0 por Segundos
+   Tiempo de Servicio Promedio = 5.0 Segundos.
+   Tiempo adicional que el sistema estuvo abierto = 0.0 Segundos.
+   Tiempo promedio de un cliente en cola = 0.0 Segundos.
+   Tiempo promedio de un cliente en sistema = 5.0 Segundos.  Servidor 1: 100.00 %,  Servidor 2: 90.00 %,  Servidor 3: 100.00 %,

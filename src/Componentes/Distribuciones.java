@@ -23,28 +23,31 @@ public class Distribuciones {
       this.probabilidad=probabilidad;
     }
     
-    public int gettiempo(){
+    public int getTiempo(){
       return this.tiempo;
     }
+
+    public void setTiempo(int tiempo){
+      this.tiempo = tiempo;
+    }
     
-    public double getprobabilidad(){
+    public double getProbabilidad(){
       return this.probabilidad;
     }
     
-    public void setprobabilidad(double probabilidad){
+    public void setProbabilidad(double probabilidad){
       this.probabilidad=probabilidad;
     }
     
-    public double getprobabilidadAcumulada(){
+    public double getProbabilidadAcumulada(){
       return this.probalidadAcumulada;
     };
     
-    public void setprobablidadAcumulada(double probabilidad){
-      System.out.println(probabilidad);  
+    public void setProbabilidadAcumulada(double probabilidad){
       this.probalidadAcumulada=probabilidad;
     };
     
-    public double getvalorMax(){
+    public double getValorMax(){
       return this.probalidadAcumulada - 1;
     };
     
@@ -56,9 +59,13 @@ public class Distribuciones {
       this.valorMin=valorMin;
     };
     
+    public void setValorMax(double valorMax){
+      this.valorMax = valorMax;
+    };
+    
     @Override
     public String toString() {
-        return "Valor = " + this.tiempo + ", Porcentaje = " + this.probabilidad + ", Porcentaje acumulado = " + this.probalidadAcumulada + ", Intervalo = (" + this.valorMin + "," + this.getvalorMax() + ")";
+        return "Valor = " + this.tiempo + ", Porcentaje = " + this.probabilidad + ", Porcentaje acumulado = " + this.probalidadAcumulada + ", Intervalo = (" + this.valorMin + "," + this.getValorMax() + ")";
     }
 
 }

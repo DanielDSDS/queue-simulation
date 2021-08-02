@@ -39,15 +39,15 @@ public class TablaDistribuciones {
         this.probabilidades.add(p);
         Distribuciones dis=new Distribuciones(this.tiempos.get(this.tiempos.size()-1),this.probabilidades.get(this.probabilidades.size()-1));
         if(this.tabla.size()==0){
-            dis.setprobablidadAcumulada(this.probabilidades.get(this.probabilidades.size()-1));  
+            dis.setProbabilidadAcumulada(this.probabilidades.get(this.probabilidades.size()-1));  
             dis.setValorMin(0);
-            dis.getvalorMax();
+            dis.getValorMax();
             tabla.add(dis);
           }
           else{
-           dis.setprobablidadAcumulada(this.tabla.get(this.tabla.size()-1).getprobabilidadAcumulada()+dis.getprobabilidad());
+           dis.setProbabilidadAcumulada(this.tabla.get(this.tabla.size()-1).getProbabilidadAcumulada()+dis.getProbabilidad());
            
-           dis.setValorMin(this.tabla.get(this.tabla.size()-1).getvalorMax()+1);
+           dis.setValorMin(this.tabla.get(this.tabla.size()-1).getValorMax()+1);
            tabla.add(dis);     
           }
        }
@@ -64,15 +64,15 @@ public class TablaDistribuciones {
           System.out.println("SIZE Interator: "+tabla.size());
           Distribuciones dis=new Distribuciones(this.tiempos.get(i),this.probabilidades.get(i));
           if(i==0){
-            dis.setprobablidadAcumulada(this.probabilidades.get(i));  
+            dis.setProbabilidadAcumulada(this.probabilidades.get(i));  
             dis.setValorMin(0);
-            dis.getvalorMax();
+            dis.getValorMax();
             tabla.add(i,dis);
             i++;
           }
           else{
-           dis.setprobablidadAcumulada(this.tabla.get(i-1).getprobabilidadAcumulada()+dis.getprobabilidad());
-           dis.setValorMin(this.tabla.get(i-1).getvalorMax()+1);
+           dis.setProbabilidadAcumulada(this.tabla.get(i-1).getProbabilidadAcumulada()+dis.getProbabilidad());
+           dis.setValorMin(this.tabla.get(i-1).getValorMax()+1);
            tabla.add(i,dis);   
            i++;   
           }
@@ -83,8 +83,8 @@ public class TablaDistribuciones {
     };
     
     public boolean completo(){
-       System.out.println("completo? " + tabla.get(tabla.size()-1).getprobabilidadAcumulada());
-        if(tabla.get(tabla.size()-1).getprobabilidadAcumulada()==100){
+       System.out.println("completo? " + tabla.get(tabla.size()-1).getProbabilidadAcumulada());
+        if(tabla.get(tabla.size()-1).getProbabilidadAcumulada()==100){
            return true;
         }
        return false;
@@ -95,8 +95,8 @@ public class TablaDistribuciones {
     
     public int getTiempo(int random){
         for(int i=0;i<this.tabla.size();i++){
-            if(random>=this.tabla.get(i).getValorMin() && random<=this.tabla.get(i).getvalorMax())
-                return this.tabla.get(i).gettiempo();
+            if(random>=this.tabla.get(i).getValorMin() && random<=this.tabla.get(i).getValorMax())
+                return this.tabla.get(i).getTiempo();
         }
         return 0;
     }

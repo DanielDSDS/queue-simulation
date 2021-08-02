@@ -27,7 +27,10 @@ public class Funciones {
     public double tiempoAdicional;
     public ArrayList<Double> porcentajeUtilizacion;
     public double porcentajeUtilizacionGeneral;
-    public double relacionOptima;
+    public double costoDeServidor;
+    public double costoOperacionExtra;
+    public double costoOperacion;
+    public double costoEspera;
  
     
      public Funciones(int numServers) {
@@ -54,9 +57,13 @@ public class Funciones {
         this.tiempoEnSistema = 0;
         
         this.tiempoAdicional = 0;
+
+        this.costoDeServidor = 0;
+        this.costoOperacion = 0;
+        this.costoOperacionExtra = 0;
+        this.costoEspera = 0;
         
         this.porcentajeUtilizacionGeneral = 0;
-        this.relacionOptima = 0;
         this.porcentajeUtilizacion = new ArrayList<>();
         for(int i=0;i<=numServers;i++)
             this.porcentajeUtilizacion.add(0.0);
@@ -82,8 +89,8 @@ public class Funciones {
         this.cantidadLlegadas = tabla.getTabla().size();
         int salida,siguiente;
         for(int i=0,j=1;j<tabla.getTabla().size();i++,j++){
-            salida = tabla.getTabla().get(i).gettiempo();
-            siguiente = tabla.getTabla().get(j).gettiempo();
+            salida = tabla.getTabla().get(i).getTiempo();
+            siguiente = tabla.getTabla().get(j).getTiempo();
             this.tiempoEntreLLegadas = this.tiempoEntreLLegadas + siguiente - salida;
         }
             
@@ -115,6 +122,13 @@ public class Funciones {
             this.tiempoDeServicio=this.tiempoDeServicio+tiempo;
             this.cantidadServicio=this.cantidadServicio+1;
         }
+    }
+
+    public void calcularCostos(int costoDeEspera, int costoPorServidor, int costoSistemaExtra, int costoSistema, int timeModeling) {
+      this.costoEspera = costoDeEspera*this.tiempoEnCola; 
+      this.costoDeServidor = costoPorServidor*this.tiempoDeServicio; 
+      this.costoOperacion = costoSistema*timeModeling; 
+      this.costoOperacionExtra = costoSistemaExtra*this.tiempoAdicional; 
     }
     
     public void tiempoDeServicioPromedio(){
@@ -182,10 +196,6 @@ public class Funciones {
       } else {
         this.tiempoAdicional = 0;
       }
-    }
-    
-     public void relacionOptima(int costoEsperaCliente, int costoServidor){
-        this.relacionOptima = (this.clientesEnCola*costoEsperaCliente)/costoServidor;
     }
     
      public void actualizarPorcentajeUtilizacion(int prev,int tiempo,int servidor,int uso){

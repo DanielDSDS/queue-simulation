@@ -38,6 +38,10 @@ public class Salida extends javax.swing.JFrame {
       this.labelTiempoAdicional.setText("Tiempo adicional que el sistema estuvo abierto : " + est.tiempoAdicional + " " + unidad);
       this.labelTiempoColaPromedio.setText("Tiempo promedio de un cliente en cola : " + numberFormat.format(est.tiempoEnCola) + " " + unidad);
       this.labelTiempoSistemaPromedio.setText("Tiempo promedio de un cliente el sistema : " + numberFormat.format(est.tiempoEnSistema) + " " + unidad);
+      this.labelCostoEspera.setText("Costo total por espera de clientes : " + numberFormat.format(est.costoEspera) + "$");
+      this.labelCostoServidores.setText("Costo total por uso de servidores : " + numberFormat.format(est.costoDeServidor) + "$");
+      this.labelCostoOperacion.setText("Costo por uso de sistema : " + numberFormat.format(est.costoOperacion) + "$");
+      this.labelCostoOperacionExtra.setText("Costo por uso extra del sistema : " + numberFormat.format(est.costoOperacionExtra) + "$");
     }
 
     public ManejoArchivo getArchivoSalida() {
@@ -75,6 +79,10 @@ public class Salida extends javax.swing.JFrame {
         labelTiempoAdicional = new javax.swing.JLabel();
         labelTiempoColaPromedio = new javax.swing.JLabel();
         labelTiempoSistemaPromedio = new javax.swing.JLabel();
+        labelCostoEspera = new javax.swing.JLabel();
+        labelCostoServidores = new javax.swing.JLabel();
+        labelCostoOperacionExtra = new javax.swing.JLabel();
+        labelCostoOperacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -151,15 +159,31 @@ public class Salida extends javax.swing.JFrame {
         labelTiempoSistemaPromedio.setText("Tiempo promedio que el cliente estuvo en el sistema: ");
         jPanel1.add(labelTiempoSistemaPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, -1, 11));
 
+        labelCostoEspera.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelCostoEspera.setText("Costo por espera de clientes: ");
+        jPanel1.add(labelCostoEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, 11));
+
+        labelCostoServidores.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelCostoServidores.setText("Costo por uso de servidores: ");
+        jPanel1.add(labelCostoServidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, -1, 11));
+
+        labelCostoOperacion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelCostoOperacion.setText("Costo por uso del sistema: ");
+        jPanel1.add(labelCostoOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, -1, 11));
+        
+        labelCostoOperacionExtra.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelCostoOperacionExtra.setText("Costo por operacion extra del sistema: ");
+        jPanel1.add(labelCostoOperacionExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, -1, 11));
+
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setText("Eventos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 390, -1, 14));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 470, -1, 14));
 
         tabla.setColumns(20);
         tabla.setRows(5);
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 700, 390));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 700, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +194,7 @@ public class Salida extends javax.swing.JFrame {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -196,6 +220,10 @@ public class Salida extends javax.swing.JFrame {
     private javax.swing.JLabel labelTiempoColaPromedio;
     private javax.swing.JLabel labelTiempoSistemaPromedio;
     private javax.swing.JLabel labelTiempoServicioPromedio;
+    private javax.swing.JLabel labelCostoEspera;
+    private javax.swing.JLabel labelCostoServidores;
+    private javax.swing.JLabel labelCostoOperacion;
+    private javax.swing.JLabel labelCostoOperacionExtra;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;

@@ -26,6 +26,8 @@ public class Sistema {
     private int numClientMax;
     private int costoEsperaClient;
     private int costoDeServidor;
+    private int costoOperacion;
+    private int costoOperacionExtra;
     private String tipoEvent;
     
     private TablaDistribuciones tablaLLegadas;
@@ -46,7 +48,7 @@ public class Sistema {
      * @param tablaServicio Representa los valores de tiempos de servicio y sus probabilidades
      */
       
-     public Sistema( int numServers, int finishTime, int numClientMax, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
+     public Sistema( int numServers, int finishTime, int numClientMax, int costoOperacionExtra, int costoOperacion, int costoEsperaClient,int costoServidor,TablaDistribuciones tablaLlegadas,TablaDistribuciones tablaServicio,Salida salida ){
        this.timeModeling=0;
        this.prevTimeModeling=0;
        this.variables=new TablaVariables();
@@ -66,6 +68,8 @@ public class Sistema {
        this.numClientSistem=0;
        this.costoEsperaClient=costoEsperaClient;
        this.costoDeServidor=costoServidor;
+       this.costoOperacion=costoOperacion;
+       this.costoOperacionExtra = costoOperacionExtra;
        this.numClientMax= numClientMax;
        this.tipoEvent="Condiciones Iniciales";
        this.tablaLLegadas=tablaLlegadas;
@@ -231,10 +235,9 @@ public class Sistema {
      } while ((this.timeModeling<this.finishTime || this.variables.getVariables().getCantClientes()!=0|| !this.Lista_espera.isEmpty()) && !this.clientes.allDespachados());
      this.F.CalcularPromedios(this.timeModeling);
      this.F.calcularTiempoAdicional(timeModeling, finishTime);
-     this.F.relacionOptima(costoEsperaClient, costoDeServidor);
+     this.F.calcularCostos(costoEsperaClient, costoDeServidor, costoOperacionExtra, costoOperacion, timeModeling);
 
      S.setLabelsText(this.F, unidad);
-     //S.addInfo(this.F.toString(unidad));
      S.getArchivoSalida().escribirArchivo(this.F.generarSalida(unidad));
   }; 
   
