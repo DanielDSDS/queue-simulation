@@ -175,7 +175,7 @@ public class Funciones {
         this.clientesEnSistema = this.clientesEnSistema/tiempoFinal;
     }
     
-    public void actualizarTiempoClienteEnSistema(int entrada,int salida,int nroCliente){
+    public void actualizarTiempoClienteEnSistema(int entrada,int salida){
         this.tiempoEnSistema = this.tiempoEnSistema+(salida-entrada);
     }
     
@@ -183,7 +183,7 @@ public class Funciones {
         this.tiempoEnSistema = this.tiempoEnSistema/this.cantidadLlegadas;
     }
     
-     public void actualizarTiempoClienteEnCola(int entrada,int salida,int servicio,int nroCliente){
+     public void actualizarTiempoClienteEnCola(int entrada,int salida,int servicio){
         this.tiempoEnCola = this.tiempoEnCola+(salida-entrada-servicio);
     }
     public void calcularTiempoPromedioClienteEnCola(){
