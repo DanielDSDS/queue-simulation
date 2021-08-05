@@ -70,7 +70,7 @@ public class Funciones {
        
     };
      
-    public void CalcularPromedios(int timeModeling){
+    public void calcularPromedios(int timeModeling){
         this.tiempoEntreLLegadasPromedio();
         this.llegadasPromedio();
         this.tiempoDeServicioPromedio();
@@ -148,14 +148,14 @@ public class Funciones {
     }
     
     public void calcularProbabilidadEsperar(){
-        this.probabilidadDeEsperar = Math.abs((this.cantidadLlegadas-this.clientesNoEsperan-this.clientesSeVan)/this.cantidadLlegadas);
+        this.probabilidadDeEsperar = (100*(this.cantidadLlegadas-this.clientesNoEsperan))/this.cantidadLlegadas;
     }
     
-    public void actualizarCantidadClientesEnCola(int prev, int actual,int waitingLength){
+    public void actualizarCantidadClientesEnCola(int actual){
         if(actual==0)
             this.clientesEnCola=0;
         else{
-            this.clientesEnCola=this.clientesEnCola+Math.abs(actual-prev)*(waitingLength);
+            this.clientesEnCola=this.clientesEnCola+1;
         }
     }
     
@@ -163,11 +163,11 @@ public class Funciones {
         this.clientesEnCola= this.clientesEnCola/tiempoFinal;
     }
    
-    public void actualizarCantidadClientesEnSistema(int prev, int actual,int numClientSistem){
+    public void actualizarCantidadClientesEnSistema(int actual){
         if(actual==0)
             this.clientesEnSistema=0;
         else{
-            this.clientesEnSistema= this.clientesEnSistema+Math.abs(actual-prev)*(numClientSistem);
+            this.clientesEnSistema= this.clientesEnSistema + 1;
         }
     }
     
@@ -198,44 +198,39 @@ public class Funciones {
       }
     }
     
-     public void actualizarPorcentajeUtilizacion(int prev,int tiempo,int servidor,int uso){
-        if(prev==0 && tiempo==0)
+     public void actualizarPorcentajeUtilizacion(int tiempo,int servidor,int uso){
+        if(tiempo==0)
             this.porcentajeUtilizacion.set(servidor,0.0);
         else
-            this.porcentajeUtilizacion.set(servidor, (this.porcentajeUtilizacion.get(servidor)+(tiempo-prev)*uso));
+            this.porcentajeUtilizacion.set(servidor, (this.porcentajeUtilizacion.get(servidor)+uso));
     }
     
     public void calcularPorcentajeUtilizacion(int tiempoFinal){
         for(int i=0;i<this.porcentajeUtilizacion.size();i++){
-            this.porcentajeUtilizacion.set(i, this.porcentajeUtilizacion.get(i)/tiempoFinal);
+            this.porcentajeUtilizacion.set(i, (100*this.porcentajeUtilizacion.get(i))/tiempoFinal);
         }
     }
     
     public void calcularPorcentajeUtilizacionGeneral(){
         double valorSumado=0;
         for(int i=0;i<this.porcentajeUtilizacion.size();i++)
-            valorSumado = valorSumado + 1 - this.porcentajeUtilizacion.get(i);
+            valorSumado = valorSumado + this.porcentajeUtilizacion.get(i);
         this.porcentajeUtilizacionGeneral = valorSumado/this.porcentajeUtilizacion.size();
     }
 
-    public void actualizarPorcentajes(int prevTimeModeling, int timeModeling,ArrayList<Boolean> statusServer){
+    public void actualizarPorcentajes(int timeModeling,ArrayList<Boolean> statusServer){
         for(int i=0;i<statusServer.size();i++){
             int uso;
             if(statusServer.get(i)!=false)
                 uso=1;
             else
                 uso=0;
-            this.actualizarPorcentajeUtilizacion(prevTimeModeling,timeModeling,i,uso);
+            this.actualizarPorcentajeUtilizacion(timeModeling,i,uso);
         }
     }
 
     public String generarSalida(String unidad) {
         DecimalFormat numberFormat = new DecimalFormat("0.00");
-        String porcentajeUtilizacionUnitario = "";
-        for (int i=0;i<this.porcentajeUtilizacion.size();i++) {
-            porcentajeUtilizacionUnitario = porcentajeUtilizacionUnitario +"  Servidor "+ (i+1) + ": " +
-                    (numberFormat.format(100 - this.porcentajeUtilizacion.get(i)*100))+" %,";
-        }
         return  "\n   Estadisticas :" +
                 
                 "\n   Cantidad de Llegadas = " + cantidadLlegadas + " llegadas" +
@@ -248,8 +243,8 @@ public class Funciones {
                 "\n   Cantidad de veces que un cliente se fue = " + clientesSeVan + " veces."+
                 "\n   Cantidad de clientes promedio en cola = " + clientesEnCola + " clientes."+ 
                 "\n   Cantidad de clientes promedio en el sistema = " + clientesEnSistema + " clientes."+
-                "\n   Probabilidad de un cliente de esperar = " + numberFormat.format(100 - probabilidadDeEsperar*100) + "%." +
-                "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(porcentajeUtilizacionGeneral*100) + "%." +
+                "\n   Probabilidad de un cliente de esperar = " + numberFormat.format(probabilidadDeEsperar) + "%." +
+                "\n   Porcentaje de utilizacion del sistema = " + numberFormat.format(porcentajeUtilizacionGeneral) + "%." +
 
                 "\n\n   Tiempo entre LLegadas Promedio = " + tiempoEntreLLegadasPromedio + " por " + unidad +
                 "\n   Tiempo de Servicio Promedio = " + tiempoDeServicioPromedio +  " " + unidad + "." +
