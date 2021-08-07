@@ -10,38 +10,54 @@ package Componentes;
  * @author Daniel Bermudez
  */
 public class Clientes {
-    private int Nro; //Nro del cliente
-    private int tell; //Tiempo entre llegadas
-    private int ts; //Tiempo de servicio
-    private int NroS=-1;//Servidor en el que esta el cliente(-1) representa que no esta asignado a ningun servidor
-    
-    Clientes(int nro,int tell,int ts){
-      this.Nro=nro;
-      this.tell=tell;
-      this.ts=ts;
-    }
-    
-    public int getNro(){
-      return this.Nro;
-    }
-    
-    public int getTELL(){
-      return this.tell;
-    }
-    
-    public int getTS(){
-      return this.ts;
-    }
-    public void setNroS(int NroS){
-        this.NroS=NroS;
-    }
-    public int getNroS(){
-       return this.NroS;
-    }
-    
-    @Override
-    public String toString(){
-        return "Cliente Nro: "+this.Nro+" /TS:  "+this.ts+" /TLL:"+this.tell;
-    }
-    
+
+  private int indexCliente; //Nro del cliente
+  private int TELL; //Tiempo entre llegadas
+  private int TS; //Tiempo de servicio
+  private int numServidor = -1; //Servidor en el que esta el cliente(-1) representa que no esta asignado a ningun servidor
+
+  Clientes(int numCliente, int tell) {
+    this.indexCliente = numCliente;
+    this.TELL = tell;
+  }
+
+  public int getClientIndex() {
+    return this.indexCliente;
+  }
+
+  public int getTELL() {
+    return this.TELL;
+  }
+
+  public void setTELL(int tiempoLlegada) {
+    this.TELL = tiempoLlegada;
+  }
+
+  public int getTS() {
+    return this.TS;
+  }
+
+  public void setTS(int tiempoServicio) {
+    this.TS = tiempoServicio;
+  }
+
+  public void setNumServidor(int numServidor) {
+    this.numServidor = numServidor;
+  }
+
+  public int getNumServidor() {
+    return this.numServidor;
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "Cliente Nro: " +
+      this.indexCliente +
+      " /TS:  " +
+      this.TS +
+      " /TLL:" +
+      this.TELL
+    );
+  }
 }
