@@ -86,7 +86,6 @@ public class Salida extends javax.swing.JFrame {
     jScrollPane1 = new javax.swing.JScrollPane();
     tabla = new javax.swing.JTextArea();
     labelClientesLlegaron = new javax.swing.JLabel();
-    labelClientesSalieron = new javax.swing.JLabel();
     labelClientesSinEspera = new javax.swing.JLabel();
     labelClientesSeVa = new javax.swing.JLabel();
     labelClienteEspera = new javax.swing.JLabel();
@@ -122,13 +121,6 @@ public class Salida extends javax.swing.JFrame {
     jPanel1.add(
       labelClientesLlegaron,
       new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 11)
-    );
-
-    labelClientesSalieron.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-    labelClientesSalieron.setText("Cantidad de clientes que salieron: ");
-    jPanel1.add(
-      labelClientesSalieron,
-      new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 11)
     );
 
     labelClientesSinEspera.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -243,7 +235,6 @@ public class Salida extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JLabel labelClientesLlegaron;
-  private javax.swing.JLabel labelClientesSalieron;
   private javax.swing.JLabel labelClientesSinEspera;
   private javax.swing.JLabel labelClientesSeVa;
   private javax.swing.JLabel labelClienteEspera;

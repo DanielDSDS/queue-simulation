@@ -188,7 +188,7 @@ public class Entrada extends javax.swing.JFrame {
       new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1)
     );
 
-    unidadCostoEsperaCliente.setFont(new java.awt.Font("Roboto Mono", 2, 15)); // NOI18N
+    unidadCostoEsperaCliente.setFont(new java.awt.Font("Roboto Mono", 1, 15)); // NOI18N
     unidadCostoEsperaCliente.setForeground(new java.awt.Color(0, 0, 0));
     unidadCostoEsperaCliente.setText("$ por Segundo");
     jPanel1.add(
@@ -203,7 +203,7 @@ public class Entrada extends javax.swing.JFrame {
       new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1)
     );
 
-    unidadCostoServidor.setFont(new java.awt.Font("Roboto Mono", 2, 15)); // NOI18N
+    unidadCostoServidor.setFont(new java.awt.Font("Roboto Mono", 1, 15)); // NOI18N
     unidadCostoServidor.setForeground(new java.awt.Color(0, 0, 0));
     unidadCostoServidor.setText("$ por Segundo");
     jPanel1.add(
@@ -218,7 +218,7 @@ public class Entrada extends javax.swing.JFrame {
       new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1)
     );
 
-    unidadCostoSistema.setFont(new java.awt.Font("Roboto Mono", 2, 15)); // NOI18N
+    unidadCostoSistema.setFont(new java.awt.Font("Roboto Mono", 1, 15)); // NOI18N
     unidadCostoSistema.setForeground(new java.awt.Color(0, 0, 0));
     unidadCostoSistema.setText("$ por Segundo");
     jPanel1.add(
@@ -233,7 +233,7 @@ public class Entrada extends javax.swing.JFrame {
       new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1)
     );
 
-    unidadCostoExtra.setFont(new java.awt.Font("Roboto Mono", 2, 15)); // NOI18N
+    unidadCostoExtra.setFont(new java.awt.Font("Roboto Mono", 1, 15)); // NOI18N
     unidadCostoExtra.setForeground(new java.awt.Color(0, 0, 0));
     unidadCostoExtra.setText("$ por Segundo");
     jPanel1.add(

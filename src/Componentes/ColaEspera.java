@@ -12,7 +12,7 @@ public class ColaEspera {
     this.colaEspera = new ArrayList<>();
   }
 
-  public int añadirCliente(int numCliente) {
+  public int addClient(int numCliente) {
     if (colaEspera.size() < capacidad) {
       colaEspera.add(numCliente);
       return 1;

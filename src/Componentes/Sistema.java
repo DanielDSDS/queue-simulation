@@ -94,7 +94,6 @@ public class Sistema {
     int tiempoServicio;
     int serverIndex;
     Clientes currentClient, nextCliente;
-    boolean despachadoTodos = false;
 
     do {
       nextSalida = this.getNextSalida();
@@ -114,13 +113,12 @@ public class Sistema {
         tiempoLlegada = tablaLLegadas.getTiempo(randomLlegada);
         tiempoServicio = tablaServicios.getTiempo(randomServicio);
 
-        Funciones.actualizarCantidadClientesEnSistema(simulationTime);
         Funciones.actualizarPorcentajes(
           prevSimulationTime,
           simulationTime,
           statusServers
         );
-        Funciones.actualizarCantidadLlegadas(simulationTime);
+        Funciones.actualizarCantidadLlegadas();
 
         Salida.addInfo("\n///////Tipo de evento: Llegada////////");
         Salida.addInfo("\n-> TM: " + simulationTime);
@@ -130,7 +128,7 @@ public class Sistema {
         if (!statusServers.hayServidorLibre()) {
           //Todos los servidores estan ocupados - Se coloca en cola
 
-          if (waitingList.añadirCliente(clientIndex) == 0) {
+          if (waitingList.addClient(clientIndex) == 0) {
             //Capacidad maxima alcanzada, cliente se va
             Funciones.actualizarClientesSeVan();
             Salida.addInfo("\nCliente se va sin ser atendido");
@@ -138,7 +136,7 @@ public class Sistema {
             //El cliente entra a la cola y al sistema
             Funciones.actualizarCantidadClientesEnCola(simulationTime);
             clientes.addClient(clientIndex, simulationTime);
-            waitingList.añadirCliente(clientIndex);
+            waitingList.addClient(clientIndex);
             cantidadClientes++;
 
             Salida.addInfo(
